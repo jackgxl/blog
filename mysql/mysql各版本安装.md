@@ -22,7 +22,7 @@ yum install gcc gcc-c++ cmake  make  autoconf automake ncurses-devel  libaio.x86
 		* soft nproc 65535
 		* hard nproc 65535
 
-##mysql5.1
+##<font color=blue>mysql5.1</font>
 
 ####下载安装包
 ```
@@ -126,15 +126,15 @@ $bindir/mysqld_safe --defaults-file=/data/mysql5172_3306/etc/my.cnf --datadir=$d
 修改密码：
 /data/mysql5172_3306/bin/msyql -u root
 
-mysql> set password=password('213456');
+mysql> set password=password('123456');
 ```
-
-**mysql5.1.72 安装完毕**
-
-------------------------------------------
-##msyql5.5
-
-
+ 
+**<font color=red size=5>mysql5.1.72 安装完毕</font>**
 
 ------------------------------------------
-##mysql5.6
+##<font color=blue>mysql5.5</font>
+
+
+
+------------------------------------------
+##<font color=blue>mysql5.6</font>
