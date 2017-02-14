@@ -108,10 +108,10 @@ drwxr-xr-x 2 mysql mysql  6 Feb 14 10:56 var
 初始化数据文件：
 /data/mysql5172_3306/bin/mysql_install_db --defaults-file=/data/mysql5172_3306/etc/my.cnf --user=mysql
 
-~~~
+~~~ 
 启动mysql：
 
-```
+```sh
 cd /data/mysql5172_3306
 
 cp share/mysql/mysql.server bin
@@ -127,6 +127,7 @@ $bindir/mysqld_safe --defaults-file=/data/mysql5172_3306/etc/my.cnf --datadir=$d
 /data/mysql5172_3306/bin/msyql -u root
 
 mysql> set password=password('123456');
+mysql> flush privileges;
 ```
  
 **mysql5.1.72 安装完毕**
