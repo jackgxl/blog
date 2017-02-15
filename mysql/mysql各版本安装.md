@@ -1,4 +1,5 @@
 #mysql安装文档
+
 **安装前环境配置**：
 
 创建用户：
@@ -6,6 +7,7 @@
 ```
 useradd -M -s /sbin/nologin  mysql 
 ```
+
 配置依赖环境：
 
 ```
@@ -36,7 +38,6 @@ tar xf mysql-5.1.72.tar.gz
 ####创建目录
 ```
 mkdir /data/mysql5172_3306 -p
-mkdir /usr/local/mysql5172_3306 -p
 ```
 ####编译安装
 ```
@@ -109,12 +110,12 @@ drwxr-xr-x 2 mysql mysql  6 Feb 14 10:56 var
 /data/mysql5172_3306/bin/mysql_install_db --defaults-file=/data/mysql5172_3306/etc/my.cnf --user=mysql
 
 ~~~ 
-启动mysql：
+####启动mysql：
 
-```sh
+```
 cd /data/mysql5172_3306
 
-cp share/mysql/mysql.server bin
+cp share/mysql/mysql.server bin/
 修改启动脚本：
 vim bin/mysql.server
 
@@ -130,10 +131,79 @@ mysql> set password=password('123456');
 mysql> flush privileges;
 ```
  
-**mysql5.1.72 安装完毕**
+###mysql5.1.72 安装完毕
 ***
 ##mysql5.5
 
+####下载安装包
+```
+mysql5.5版本 mysql-5.5.51.tar.gz，请到官方网站下载移动到/home 并验证md5值 
+```
+####解压
+```
+cd /home/
+tar xf mysql-5.5.51.tar.gz
+```
+####创建目录
+```
+mkdir -p /data/mysql5551_3307
+```
+####编译安装
+```
+export bpath=/data/mysql5551_3307
 
+cmake . \
+-DCMAKE_INSTALL_PREFIX=${bpath}  \
+-DINSTALL_MYSQLDATADIR=${bpath}/var  \
+-DMYSQL_DATADIR=${bpath}/var \
+-DSYSCONFDIR=${bpath}/etc    \
+-DMYSQL_UNIX_ADDR=${bpath}/tmp/mysql.sock  \
+-DWITH_INNOBASE_STORAGE_ENGINE=1  \
+-DWITH_MYISAM_STORAGE_ENGINE=1 \
+-DWITH_MEMORY_STORAGE_ENGINE=1 \
+-DDEFAULT_CHARSET=utf8   \
+-DDEFAULT_COLLATION=utf8_general_ci  \
+-DMYSQL_TCP_PORT=3307  \
+-DWITH_READLINE=1 \
+-DENABLED_LOCAL_INFILE=1 \
+-DWITH_EXTRA_CHARSETS=all \
+-DMYSQL_USER=mysql
+
+make -j `cat /proc/cpuinfo |grep processor|wc -l`
+
+make install
+
+也可以同步执行命令make && make install
+```
+####初始化
+```
+进入安装目录
+cd /data/mysql5551_3307/
+创建数据目录：
+mkdir etc var log tmp
+修改配置文件：
+vim etc/my.cnf
+修改文件属主：
+chown -R mysql:mysql .
+初始化数据文件：
+./scripts/mysql_install_db --defaults-file=etc/my.cnf --user=mysql
+
+```
+####启动mysql
+```
+拷贝启动文件；
+cp support-files/mysql.server bin/
+修改启动文件：
+vim bin/mysql.server
+修改的语句：
+$bindir/mysqld_safe --defaults-file=/data/mysql5551_3307/etc/my.cnf --datadir="$datadir" --pid-file="$mysqld_pid_f
+ile_path" $other_args >/dev/null 2>&1 &
+启动数据库：
+./bin/mysql.server start
+设置密码：
+./bin/mysql -uroot
+set password=password('123456');
+```
 ***
+
 ##mysql5.6
