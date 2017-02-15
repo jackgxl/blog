@@ -214,9 +214,92 @@ flush privileges;
 mysql5.6版本 mysql-5.6.34.tar.gz，请到官方网站下载移动到/home 并验证md5值 
 ```
 ####解压
-
+```
+cd /home/
+tar xf mysql-5.6.34.tar.gz
+```
 ####创建目录
+```
+mkdir -p /data/mysql5634_3308
+```
 ####编译安装
+```
+export bpath=/data/mysql5634_3308
+
+cmake . \
+-DCMAKE_INSTALL_PREFIX=${bpath}  \
+-DINSTALL_MYSQLDATADIR=${bpath}/var  \
+-DMYSQL_DATADIR=${bpath}/var \
+-DSYSCONFDIR=${bpath}/etc    \
+-DWITH_INNOBASE_STORAGE_ENGINE=1  \
+-DWITH_MYISAM_STORAGE_ENGINE=1 \
+-DWITH_MEMORY_STORAGE_ENGINE=1 \
+-DDEFAULT_CHARSET=utf8   \
+-DDEFAULT_COLLATION=utf8_general_ci  \
+-DMYSQL_TCP_PORT=3308  \
+-DMYSQL_UNIX_ADDR=${bpath}/tmp/mysql.sock  \
+-DWITH_READLINE=1 \
+-DENABLED_LOCAL_INFILE=1 \
+-DWITH_EXTRA_CHARSETS=all \
+-DMYSQL_USER=mysql
+
+make -j `cat /proc/cpuinfo |grep processor|wc -l`
+
+make install
+
+也可以同步执行命令make && make install
+```
 ####初始化
+```
+进入安装目录：
+cd /data/mysql5634_3308
+
+查看安装目录文件：
+[root@localhost mysql5634_3308]# ll
+total 44
+drwxr-xr-x  2 root root  4096 Feb 15 15:01 bin
+-rw-r--r--  1 root root 17987 Sep 30 19:41 COPYING
+drwxr-xr-x  3 root root    18 Feb 15 15:01 data
+drwxr-xr-x  2 root root    55 Feb 15 15:01 docs
+drwxr-xr-x  3 root root  4096 Feb 15 15:01 include
+drwxr-xr-x  3 root root   291 Feb 15 15:01 lib
+drwxr-xr-x  4 root root    30 Feb 15 15:01 man
+drwxr-xr-x 10 root root  4096 Feb 15 15:01 mysql-test
+-rw-r--r--  1 root root  2496 Sep 30 19:41 README
+drwxr-xr-x  2 root root    30 Feb 15 15:01 scripts
+drwxr-xr-x 28 root root  4096 Feb 15 15:01 share
+drwxr-xr-x  4 root root  4096 Feb 15 15:01 sql-bench
+drwxr-xr-x  2 root root   136 Feb 15 15:01 support-files
+
+建立配置文件、数据文件、日志文件、临时文件目录：
+mkdir etc var log tmp
+
+创建配置文件：
+vim etc/my.cnf
+
+初始化数据文件：
+./scripts/mysql_install_db --defaults-file=etc/my.cnf --user=mysql
+
+查看数据文件：
+[root@localhost mysql5634_3308]# ll var/
+total 1574100
+-rw-rw---- 1 mysql mysql 1073741824 Feb 15 16:29 ibdata1
+-rw-rw---- 1 mysql mysql  268435456 Feb 15 16:29 ib_logfile0
+-rw-rw---- 1 mysql mysql  268435456 Feb 15 16:29 ib_logfile1
+drwx------ 2 mysql mysql       4096 Feb 15 16:29 mysql
+-rw-rw---- 1 mysql mysql      65444 Feb 15 16:29 mysql-bin.000001
+-rw-rw---- 1 mysql mysql    1184568 Feb 15 16:29 mysql-bin.000002
+-rw-rw---- 1 mysql mysql         38 Feb 15 16:29 mysql-bin.index
+drwx------ 2 mysql mysql       4096 Feb 15 16:29 performance_schema
+drwx------ 2 mysql mysql          6 Feb 15 16:29 test
+```
 ####启动mysql
+```
+./bin/mysql.server start
+设置密码：
+./bin/mysql -uroot
+set password=password('123456');
+flush privileges;
+
+```
 ###mysql5.6.34 安装完毕
