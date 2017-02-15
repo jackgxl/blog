@@ -203,7 +203,9 @@ ile_path" $other_args >/dev/null 2>&1 &
 设置密码：
 ./bin/mysql -uroot
 set password=password('123456');
+flush privileges;
 ```
+###mysql5.5.51 安装完毕
 ***
 
 ##mysql5.6
