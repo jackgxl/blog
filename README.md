@@ -7,3 +7,6 @@
 	* 每周日练习
 ##mysql:mysql documents
     *各个版本编译安装
+##nosql:nosql documents
+    *redis
+    *memcache
