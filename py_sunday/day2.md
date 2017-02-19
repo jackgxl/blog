@@ -1,16 +1,32 @@
 #day 2
 
-ord()
+###ord()
 
 ```
     函数获取字符的整数表示
 ```
 
-chr()
+###chr()
 
 ```
     函数把编码 转换为对应的字符   
 ```
 
-Python对byte()类型的数据用带 前缀的单引号或双引号表示
-以 Unicode 表示的 str通过 encode()方法可以编码为指定的 
+###list
+3种构造方法
+list=list()
+list=[1,2,3,'a']
+list=list((1,2,4,))
+
+
+###str
+help(str)
+dir(ste)
+###int
+help(int)
+###tuple
+help(tuple)
+
+t=(1,)
+
+
