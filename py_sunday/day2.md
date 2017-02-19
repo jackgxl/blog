@@ -29,4 +29,8 @@ help(tuple)
 
 t=(1,)
 
+t=(1,[2,3],'a','b')
+###set
+help(set)
+###函数
 
