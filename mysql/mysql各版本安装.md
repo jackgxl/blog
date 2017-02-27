@@ -57,6 +57,8 @@ export bpath=/data/mysql5172_3306
 --with-charset=utf8 \
 --without-docs \
 --without-man \
+--without-debug \
+--with-readline \
 --with-client-ldflags=-static 'CFLAGS=-g -O3' 'CXXFLAGS=-g -O3' \
 --with-extra-charsets=all \
 --enable-assembler \
@@ -70,6 +72,29 @@ make install
 
 make 和 make install看到 Making all in win 证明成功 也可以同步执行命令make && make install
 ```
+####数据文件单独存放的编译方式
+```
+./configure  \
+--prefix=/usr/local/mysql5172 \
+--localstatedir=/data/mysql5172 \
+--with-unix-socket-path=/usr/local/mysql5172/tmp/mysql.sock \
+--with-plugins=partition,csv,archive,federated,innobase,innodb_plugin,myisam,heap \
+--with-charset=utf8 \
+--without-docs \
+--without-man \
+--without-debug \
+--with-readline \
+--with-client-ldflags=-static 'CFLAGS=-g -O3' 'CXXFLAGS=-g -O3' \
+--with-extra-charsets=all \
+--enable-assembler \
+--enable-local-infile \
+--enable-profiling  \
+--enable-thread-safe-client
+
+初始化
+/usr/local/mysql5172/bin/mysql_install_db --user=mysql --basedir=/usr/local/mysql5172 --datadir=/data/mysql5172
+```
+
 ####初始化
 ~~~
 查看make结果：
@@ -119,6 +144,7 @@ drwxr-xr-x 2 mysql mysql  6 Feb 14 10:56 var
 /data/mysql5172_3306/bin/mysql_install_db --defaults-file=/data/mysql5172_3306/etc/my.cnf --user=mysql
 
 ~~~ 
+
 ####启动mysql：
 
 ```
@@ -183,6 +209,7 @@ make -j `cat /proc/cpuinfo |grep processor|wc -l`
 make install
 
 也可以同步执行命令make && make install
+
 ```
 ####初始化
 ```
