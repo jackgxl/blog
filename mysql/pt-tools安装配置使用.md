@@ -8,7 +8,7 @@ wget percona.com/get/percona-toolkit.tar.gz
 ```
 ### 解决环境依赖
 ```
-yum install perl perl-DBI perl-DBD-MySQL perl-Digest-MD5
+yum install perl perl-devel perl-Time-HiRes perl-DBI perl-DBD-MySQL perl-Digest-MD5
 ```
 ### 解压安装
 ```
