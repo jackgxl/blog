@@ -344,14 +344,54 @@ flush privileges;
 
 #### 下载安装包
 
+```
+wget https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-boost-5.7.17.tar.gz
+
+```
 
 #### 解压
 
+```
+tar xf mysql-boost-5.7.17.tar.gz
+```
+
 #### 创建目录
 
+```
+mkdir -p /data/mysql3306/
+mkdir -p /usr/local/mysql3306/
+cd /data/mysql3306
+mkdir log var
+cd /usr/local/mysql3306
+mkdir etc tmp
+```
+
 #### 编译安装
+
+```
+cmake \
+-DCMAKE_INSTALL_PREFIX=/usr/local/mysql3306 \
+-DMYSQL_UNIX_ADDR=/usr/local/mysql3306/tmp/mysql.sock \
+-DEXTRA_CHARSETS=all \
+-DDEFAULT_CHARSET=utf8 \
+-DDEFAULT_COLLATION=utf8_general_ci \
+-DWITH_MYISAM_STORAGE_ENGINE=1 \
+-DWITH_INNOBASE_STORAGE_ENGINE=1 \
+-DWITH_ARCHIVE_STORAGE_ENGINE=1 \
+-DWITH_BLACKHOLE_STORAGE_ENGINE=1 \
+-DWITH_MEMORY_STORAGE_ENGINE=1 \
+-DWITH_READLINE=1 \
+-DENABLED_LOCAL_INFILE=1 \
+-DMYSQL_DATADIR=/data/mysql3306/var \
+-DMYSQL_USER=mysql \
+-DMYSQL_TCP_PORT=3306 \
+-DENABLE_DOWNLOADS=1 \
+-DWITH_BOOST=boost/boost_1_59_0/ 
+```
 
 #### 初始化
 
 ### MGR
+
+
 
