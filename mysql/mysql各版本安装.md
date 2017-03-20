@@ -370,8 +370,8 @@ mkdir etc tmp
 
 ```
 cmake \
--DCMAKE_INSTALL_PREFIX=/usr/local/mysql3306 \
--DMYSQL_UNIX_ADDR=/usr/local/mysql3306/tmp/mysql.sock \
+-DCMAKE_INSTALL_PREFIX=/data/mysql3306 \
+-DMYSQL_UNIX_ADDR=/data/mysql3306/tmp/mysql.sock \
 -DEXTRA_CHARSETS=all \
 -DDEFAULT_CHARSET=utf8 \
 -DDEFAULT_COLLATION=utf8_general_ci \
