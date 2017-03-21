@@ -359,11 +359,8 @@ tar xf mysql-boost-5.7.17.tar.gz
 
 ```
 mkdir -p /data/mysql3306/
-mkdir -p /usr/local/mysql3306/
 cd /data/mysql3306
-mkdir log var
-cd /usr/local/mysql3306
-mkdir etc tmp
+mkdir log var etc tmp
 ```
 
 #### 编译安装
@@ -390,6 +387,10 @@ cmake \
 ```
 
 #### 初始化
+
+```
+/data/msyql3306/bin/mysqld --defaults-file=etc/my.cnf --user=mysql --initialize
+```
 
 ### MGR
 
