@@ -389,6 +389,7 @@ cmake \
 #### 初始化
 
 ```
+可以根据配置文件定制化innodb参数
 /data/msyql3306/bin/mysqld --defaults-file=etc/my.cnf --user=mysql --initialize
 ```
 
