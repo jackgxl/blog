@@ -600,10 +600,13 @@ transaction_write_set_extraction    =XXHASH64
 loose-group_replication_start_on_boot    =off
 loose-group_replication_bootstrap_group    =off
 loose-group_replication_group_name    ="cccccccc-cccc-cccc-cccc-cccccccccccc"
+# 注意localaddress端口不能和mysql的冲突
 loose-group_replication_local_address    ="192.168.64.158:4003"
 loose-group_replication_group_seeds    ="192.168.64.156:4001,192.168.64.157:4002,192.168.64.158:4003"
 
 ```
+
+#### single-primary
 **主库操作**
 
 ```
@@ -631,6 +634,8 @@ set global group_replication_bootstrap_group=off;
 
 
 ```
+从库上操作是一致的
+
 set sql_log_bin=0;
 create user backup@'192.168.64.%' identified by 'backup';
 grant replication slave,replication client on *.* to backup@'192.168.64.%';
@@ -645,5 +650,20 @@ set sql_log_bin=1;
 install plugin group_replication soname 'group_replication.so';
 
 start group_replication;
+
+```
+**TIPS**
+
+```
+group_replication_allow_local_disjoint_gtids_join= on 强制加入兼容组 进入复制组(适用于gtid模式主从切换至group_replication模式)
+
+```
+```
+跳过一个gtid复制
+stop slave;
+set next_gtid='';
+begin;commmit;
+set next_gtid='AUTOMATIC'
+start slave;
 
 ```
