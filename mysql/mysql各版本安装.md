@@ -393,7 +393,257 @@ cmake \
 /data/msyql3306/bin/mysqld --defaults-file=etc/my.cnf --user=mysql --initialize
 ```
 
+####配置文件
+
+**主库配置文件**
+
+```
+[client]
+ default-character-set = utf8
+ port                   = 3306
+ socket                 = /data/mysql3306/tmp/mysql.sock
+[mysqld]
+
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER
+
+# ngram_token_size      = 1
+
+
+# These are commonly set, remove the # and set as required.
+ basedir = /data/mysql3306
+ datadir = /data/mysql3306/var
+ port = 3306
+ server_id = 56
+ socket = /data/mysql3306/tmp/mysql.sock
+ pid-file = /data/mysql3306/var/mysql.pid
+ 
+ auto_increment_increment = 1
+ auto_increment_offset = 1
+# lower_case_table_names = 1 
+
+
+# join_buffer_size = 128M
+# sort_buffer_size = 2M
+# read_rnd_buffer_size = 2M 
+
+default-time-zone        = system
+character-set-server     = utf8
+default-storage-engine   = InnoDB
+
+log-bin                  = mysql-bin
+log-bin-index            = mysql-bin.index
+relay-log                = relay-log
+relay_log_index          = relay-log.index
+
+log-warnings             = 1
+log-error       = /data/mysql3306/log/mysql.err
+
+slow_query_log           = 2
+long-query-time          = 1
+slow_query_log_file      = /data/mysql3306/log/slow.log
+
+general_log              = 0
+general_log_file         = /data/mysql3306/log/mysql.log
+max_binlog_size          = 1G
+max_relay_log_size       = 1G
+
+max_connections          = 2000
+#####InnoDB setting###########
+
+default_storage_engine            = innodb
+default_tmp_storage_engine       = innodb
+innodb_buffer_pool_size = 4G
+innodb_data_home_dir            = /data/mysql3306/var/
+innodb_data_file_path           = ibdata1:1G:autoextend
+innodb_temp_data_file_path      = ibtmp1:512M:autoextend
+innodb_file_per_table = 1
+innodb_write_io_threads = 8
+innodb_read_io_threads = 8
+innodb_thread_concurrency = 0
+innodb_flush_log_at_trx_commit = 1
+innodb_log_buffer_size = 16M
+innodb_log_file_size = 256M
+innodb_log_files_in_group = 3
+innodb_log_group_home_dir = /data/mysql3306/var/
+innodb_max_dirty_pages_pct = 75
+innodb_flush_method=O_DIRECT
+innodb_lock_wait_timeout = 30
+innodb_open_files=65535
+innodb_use_native_aio   = on
+
+
+#####skip
+#skip-name-resolve
+skip-external-locking
+#skip-networking
+query_cache_size = 0
+query_cache_type = 0
+
+###for group replication~~~~~
+
+binlog_format = row
+binlog_checksum = none
+binlog_rows_query_log_events = on
+sync_binlog =1
+transaction_isolation = READ-COMMITTED
+log_slave_updates = on
+expire_logs_days = 7
+
+#for gtid
+gtid_mode = on
+enforce_gtid_consistency = on
+
+# for replication
+
+master_info_repository           = table
+relay_log_info_repository        = table
+
+
+
+#for group replication
+
+
+transaction_write_set_extraction    =XXHASH64 
+loose-group_replication_group_name    ="cccccccc-cccc-cccc-cccc-cccccccccccc"
+loose-group_replication_start_on_boot    =off
+loose-group_replication_local_address    ="192.168.64.156:4001"
+loose-group_replication_group_seeds    ="192.168.64.156:4001,192.168.64.157:4002,192.168.64.158:4003"
+loose-group_replication_bootstrap_group    =off
+#loose-group_replication_single_primary_mode = true
+
+#####MyISAM setting##########
+key_buffer_size = 2048M
+bulk_insert_buffer_size = 64M
+myisam_sort_buffer_size = 1G
+myisam_max_sort_file_size = 10G
+myisam_repair_threads = 8
+##thread setting~~~~~~
+thread_cache_size = 64
+
+table_open_cache = 4096
+
+
+max_allowed_packet = 256M
+
+# for sysbench
+max_prepared_stmt_count = 1000000
+#max_prepared_stmt_count = 16382
+[mysqldump]
+quick
+max_allowed_packet = 256M
+
+[mysql]
+no-auto-rehash
+default-character-set = utf8
+
+[myisamchk]
+key_buffer_size = 512M
+sort_buffer_size = 512M
+read_buffer = 8M
+write_buffer = 8M
+
+[mysqlhotcopy]
+interactive-timeout
+```
+
 ### MGR
 
+####MGR配置
+
+**主库**
+
+```
+#for gtid
+gtid_mode = on
+enforce_gtid_consistency = on
+
+# for replication
+
+master_info_repository           = table
+relay_log_info_repository        = table
 
 
+
+#for group replication
+
+
+transaction_write_set_extraction    =XXHASH64 
+loose-group_replication_group_name    ="cccccccc-cccc-cccc-cccc-cccccccccccc"
+loose-group_replication_start_on_boot    =off
+loose-group_replication_local_address    ="192.168.64.156:4001"
+loose-group_replication_group_seeds    ="192.168.64.156:4001,192.168.64.157:4002,192.168.64.158:4003"
+loose-group_replication_bootstrap_group    =off
+#loose-group_replication_single_primary_mode = true
+
+```
+**从库**
+
+```
+auto_increment_increment = 1
+auto_increment_offset = 1
+binlog_checksum = none
+binlog_rows_query_log_events = on
+sync_binlog =1
+binlog_format=row
+transaction_isolation = READ-COMMITTED
+log_slave_updates = on
+expire_logs_days = 7
+
+gtid_mode = on
+enforce_gtid_consistency = on
+
+master_info_repository           = table
+relay_log_info_repository        = table
+table_open_cache = 4096
+
+transaction_write_set_extraction    =XXHASH64
+loose-group_replication_start_on_boot    =off
+loose-group_replication_bootstrap_group    =off
+loose-group_replication_group_name    ="cccccccc-cccc-cccc-cccc-cccccccccccc"
+loose-group_replication_local_address    ="192.168.64.158:4003"
+loose-group_replication_group_seeds    ="192.168.64.156:4001,192.168.64.157:4002,192.168.64.158:4003"
+
+```
+**主库操作**
+
+```
+set sql_log_bin=0;
+create user backup@'192.168.64.%' identified by 'backup';
+grant replication slave,replication client on *.* to backup@'192.168.64.%';
+set sql_log_bin=1;
+
+
+set sql_log_bin=0;
+change master to  master_user='backup',master_password='backup' for channel 'group_replication_recovery';
+set sql_log_bin=1;
+
+
+install plugin group_replication soname 'group_replication.so';
+
+
+set global group_replication_bootstrap_group=on;
+start group_replication;
+set global group_replication_bootstrap_group=off;
+
+```
+
+**从库操作**
+
+
+```
+set sql_log_bin=0;
+create user backup@'192.168.64.%' identified by 'backup';
+grant replication slave,replication client on *.* to backup@'192.168.64.%';
+set sql_log_bin=1;
+
+
+set sql_log_bin=0;
+change master to  master_user='backup',master_password='backup' for channel 'group_replication_recovery';
+set sql_log_bin=1;
+
+
+install plugin group_replication soname 'group_replication.so';
+
+start group_replication;
+
+```
