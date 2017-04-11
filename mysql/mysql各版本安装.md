@@ -1,4 +1,4 @@
-#mysql安装文档
+# mysql安装文档
 ```
 * 说明：mysql5.1 5.5 5.6 5.7 编译安装文档 5.7.17 MGR 配置文档
 * 作者：高学亮
@@ -34,22 +34,22 @@ yum install gcc gcc-c++ cmake  make  autoconf automake ncurses-devel  libaio.x86
 		* soft nproc 65535
 		* hard nproc 65535
 
-##mysql5.1
+## mysql5.1
 
-####下载安装包
+#### 下载安装包
 ```
 mysql5.1版本 mysql-5.1.72.tar.gz，请到官方网站下载移动到/home 并验证md5值 
 ```
-####解压
+#### 解压
 ```
 cd /home
 tar xf mysql-5.1.72.tar.gz
 ```
-####创建目录
+#### 创建目录
 ```
 mkdir /data/mysql5172_3306 -p
 ```
-####编译安装
+#### 编译安装
 ```
 export bpath=/data/mysql5172_3306
 
@@ -73,7 +73,7 @@ make install
 
 make 和 make install看到 Making all in win 证明成功 也可以同步执行命令make && make install
 ```
-####数据文件单独存放的编译方式
+#### 数据文件单独存放的编译方式
 ```
 ./configure  \
 --prefix=/usr/local/mysql5172 \
@@ -96,7 +96,7 @@ make 和 make install看到 Making all in win 证明成功 也可以同步执行
 /usr/local/mysql5172/bin/mysql_install_db --user=mysql --basedir=/usr/local/mysql5172 --datadir=/data/mysql5172
 ```
 
-####初始化
+#### 初始化
 ~~~
 查看make结果：
 [root@localhost mysql-5.1.72]# ll /data/mysql5172_3306/
@@ -146,7 +146,7 @@ drwxr-xr-x 2 mysql mysql  6 Feb 14 10:56 var
 
 ~~~ 
 
-####启动mysql：
+#### 启动mysql：
 
 ```
 cd /data/mysql5172_3306
@@ -167,24 +167,24 @@ mysql> set password=password('123456');
 mysql> flush privileges;
 ```
  
-###mysql5.1.72 安装完毕
+### mysql5.1.72 安装完毕
 ***
-##mysql5.5
+## mysql5.5
 
-####下载安装包
+#### 下载安装包
 ```
 mysql5.5版本 mysql-5.5.51.tar.gz，请到官方网站下载移动到/home 并验证md5值 
 ```
-####解压
+#### 解压
 ```
 cd /home/
 tar xf mysql-5.5.51.tar.gz
 ```
-####创建目录
+#### 创建目录
 ```
 mkdir -p /data/mysql5551_3307
 ```
-####编译安装
+#### 编译安装
 ```
 export bpath=/data/mysql5551_3307
 
@@ -212,7 +212,7 @@ make install
 也可以同步执行命令make && make install
 
 ```
-####初始化
+#### 初始化
 ```
 进入安装目录
 cd /data/mysql5551_3307/
@@ -226,7 +226,7 @@ chown -R mysql:mysql .
 ./scripts/mysql_install_db --defaults-file=etc/my.cnf --user=mysql
 
 ```
-####启动mysql
+#### 启动mysql
 ```
 拷贝启动文件；
 cp support-files/mysql.server bin/
@@ -242,24 +242,24 @@ ile_path" $other_args >/dev/null 2>&1 &
 set password=password('123456');
 flush privileges;
 ```
-###mysql5.5.51 安装完毕
+### mysql5.5.51 安装完毕
 ***
 
-##mysql5.6
-####下载安装包
+## mysql5.6
+#### 下载安装包
 ```
 mysql5.6版本 mysql-5.6.34.tar.gz，请到官方网站下载移动到/home 并验证md5值 
 ```
-####解压
+#### 解压
 ```
 cd /home/
 tar xf mysql-5.6.34.tar.gz
 ```
-####创建目录
+#### 创建目录
 ```
 mkdir -p /data/mysql5634_3308
 ```
-####编译安装
+#### 编译安装
 ```
 export bpath=/data/mysql5634_3308
 
@@ -286,7 +286,7 @@ make install
 
 也可以同步执行命令make && make install
 ```
-####初始化
+#### 初始化
 ```
 进入安装目录：
 cd /data/mysql5634_3308
@@ -330,7 +330,7 @@ drwx------ 2 mysql mysql       4096 Feb 15 16:29 mysql
 drwx------ 2 mysql mysql       4096 Feb 15 16:29 performance_schema
 drwx------ 2 mysql mysql          6 Feb 15 16:29 test
 ```
-####启动mysql
+#### 启动mysql
 ```
 ./bin/mysql.server start
 设置密码：
@@ -339,7 +339,7 @@ set password=password('123456');
 flush privileges;
 
 ```
-###mysql5.6.34 安装完毕
+### mysql5.6.34 安装完毕
 
 ## mysql5.7.17 && MGR
 
@@ -394,7 +394,7 @@ cmake \
 /data/msyql3306/bin/mysqld --defaults-file=etc/my.cnf --user=mysql --initialize
 ```
 
-####配置文件
+#### 配置文件
 
 **主库配置文件**
 
@@ -549,7 +549,7 @@ interactive-timeout
 
 ### MGR
 
-####MGR配置
+#### MGR配置
 
 **主库**
 
