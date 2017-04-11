@@ -1,6 +1,6 @@
 #mysql安装文档
 ```
-* 说明：mysql5.1 5.5 5.6 编译安装文档
+* 说明：mysql5.1 5.5 5.6 5.7 编译安装文档 5.7.17 MGR 配置文档
 * 作者：高学亮
 * 邮箱：13716361153@163.com
 * 时间：20170217
@@ -413,18 +413,14 @@ sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER
  basedir = /data/mysql3306
  datadir = /data/mysql3306/var
  port = 3306
- server_id = 56
+ server_id = 1
  socket = /data/mysql3306/tmp/mysql.sock
  pid-file = /data/mysql3306/var/mysql.pid
  
  auto_increment_increment = 1
  auto_increment_offset = 1
 # lower_case_table_names = 1 
-
-
-# join_buffer_size = 128M
-# sort_buffer_size = 2M
-# read_rnd_buffer_size = 2M 
+ 
 
 default-time-zone        = system
 character-set-server     = utf8
@@ -450,8 +446,8 @@ max_relay_log_size       = 1G
 max_connections          = 2000
 #####InnoDB setting###########
 
-default_storage_engine            = innodb
-default_tmp_storage_engine       = innodb
+default_storage_engine          = innodb
+default_tmp_storage_engine      = innodb
 innodb_buffer_pool_size = 4G
 innodb_data_home_dir            = /data/mysql3306/var/
 innodb_data_file_path           = ibdata1:1G:autoextend
@@ -513,7 +509,11 @@ loose-group_replication_bootstrap_group    =off
 
 #####MyISAM setting##########
 key_buffer_size = 2048M
-bulk_insert_buffer_size = 64M
+read_buffer_size = 256M
+join_buffer_size = 128M
+sort_buffer_size = 8M
+read_rnd_buffer_size = 2M
+bulk_insert_buffer_size = 256M
 myisam_sort_buffer_size = 1G
 myisam_max_sort_file_size = 10G
 myisam_repair_threads = 8
@@ -523,14 +523,14 @@ thread_cache_size = 64
 table_open_cache = 4096
 
 
-max_allowed_packet = 256M
+max_allowed_packet = 512M
 
 # for sysbench
 max_prepared_stmt_count = 1000000
 #max_prepared_stmt_count = 16382
 [mysqldump]
 quick
-max_allowed_packet = 256M
+max_allowed_packet = 512M
 
 [mysql]
 no-auto-rehash
@@ -539,8 +539,8 @@ default-character-set = utf8
 [myisamchk]
 key_buffer_size = 512M
 sort_buffer_size = 512M
-read_buffer = 8M
-write_buffer = 8M
+read_buffer = 512M
+write_buffer = 512M
 
 [mysqlhotcopy]
 interactive-timeout
