@@ -23,7 +23,8 @@ useradd -M -s /sbin/nologin  mysql
 yum install gcc gcc-c++ cmake  make  autoconf automake ncurses-devel  libaio.x86_64 libaio-devel.x86_64 readline.x86_64 readline-devel.x86_64
 ```
 配置系统环境：
-		
+	
+	关闭NUMA
 	echo vm.swappiness = 0 >>/etc/sysctl.conf
 	sysctl -p
 	echo deadline> /sys/block/sda/queue/scheduler
