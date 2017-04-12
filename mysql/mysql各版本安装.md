@@ -391,7 +391,10 @@ cmake \
 
 ```
 可以根据配置文件定制化innodb参数
+初始化时在error log随机生成密码
 /data/msyql3306/bin/mysqld --defaults-file=etc/my.cnf --user=mysql --initialize
+初始化不生成密码
+/data/msyql3306/bin/mysqld --defaults-file=etc/my.cnf --user=mysql --initialize-insecure 
 ```
 
 #### 配置文件
