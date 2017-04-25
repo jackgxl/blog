@@ -606,7 +606,7 @@ transaction_write_set_extraction    =XXHASH64
 loose-group_replication_start_on_boot    =off
 loose-group_replication_bootstrap_group    =off
 loose-group_replication_group_name    ="cccccccc-cccc-cccc-cccc-cccccccccccc"
-# 注意localaddress端口不能和mysql的冲突
+** 注意localaddress端口不能和mysql的冲突 **
 loose-group_replication_local_address    ="192.168.64.158:4003"
 loose-group_replication_group_seeds    ="192.168.64.156:4001,192.168.64.157:4002,192.168.64.158:4003"
 
