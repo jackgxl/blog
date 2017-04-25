@@ -108,6 +108,8 @@ drwxr-xr-x 10 root  root   218 Feb 14 11:38 mysql-test
 drwxr-xr-x  4 root  root    34 Feb 14 11:38 share
 drwxr-xr-x  5 root  root  4096 Feb 14 11:38 sql-bench
 新建目录：
+[root@localhost mysql5172_3306]# mkdir  /data/mysql5172_3306/{etc,var,log,tmp} -p
+或者
 [root@localhost mysql5172_3306]# cd /data/mysql5172_3306/
 [root@localhost mysql5172_3306]# mkdir etc var log tmp
 
