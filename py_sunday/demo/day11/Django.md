@@ -10,3 +10,7 @@ python manage.py migratem
 
 model 用oop的思想去操纵数据库
 ```
+
+DAL (DATA ACCESS LEBAL)
+
+DAO 
