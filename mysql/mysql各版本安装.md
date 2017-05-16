@@ -20,7 +20,7 @@ useradd -M -s /sbin/nologin  mysql
 配置依赖环境：
 
 ```
-yum install gcc gcc-c++ cmake  make  autoconf automake ncurses-devel  libaio.x86_64 libaio-devel.x86_64 readline.x86_64 readline-devel.x86_64
+yum install  gcc gcc-c++ cmake  make  autoconf automake ncurses-devel zlib zlib-devel libxml2 libxml2-devel libaio.x86_64 libaio-devel.x86_64 readline.x86_64 readline-devel.x86_64
 ```
 配置系统环境：
 	
@@ -272,7 +272,7 @@ cmake . \
 -DSYSCONFDIR=${bpath}/etc    \
 -DWITH_INNOBASE_STORAGE_ENGINE=1  \
 -DWITH_MYISAM_STORAGE_ENGINE=1 \
--DWITH_MEMORY_STORAGE_ENGINE=1 \
+-DWITH_BLACKHOLE_STORAGE_ENGINE=1 \
 -DDEFAULT_CHARSET=utf8   \
 -DDEFAULT_COLLATION=utf8_general_ci  \
 -DMYSQL_TCP_PORT=3308  \
