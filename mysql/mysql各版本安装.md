@@ -2,7 +2,7 @@
 ```
 * 说明：mysql5.1 5.5 5.6 5.7 编译安装文档 5.7.17 MGR 配置文档
 * 作者：高学亮
-* 邮箱：gao_xueliang@qq.com
+* 邮箱：gao.xueliang@qq.com
 * 时间：20170217
 * 版本：1.0
 
