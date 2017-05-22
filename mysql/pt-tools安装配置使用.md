@@ -26,7 +26,8 @@ pt-table-checksum --version
 ```
 ## tp-tools 使用说明
 ### pt-table-checksum
-####主库操作 所有从库全部更新（适合一主一从）
+#### 主库操作 所有从库全部更新（适合一主一从）
+
 ```
 检查d1库t1下表的数据 主从是否一致
 /usr/local/bin/pt-table-checksum --nocheck-binlog-format --nocheck-replication-filters --replicate=gao.checksums  --set-vars innodb_lock_wait_timeout=50  --databases=gao --tables=t1 --host=localhost --port=3306 --user=root --password=213456 -S /data/mysql5172_3306/tmp/mysql.sock
@@ -49,7 +50,7 @@ select db, tbl, sum(this_cnt) as total_rows, count(*) as chunks from checksums w
 +-----+-----+------------+--------+
 
 ```
-####一主多从 检查单个从库数据一致性 从库操作
+#### 一主多从 检查单个从库数据一致性 从库操作
 
 * 主库创建用户：
 
@@ -100,8 +101,8 @@ GRANT SELECT,LOCK TABLES,PROCESS,SUPER on *.* to pt_user@'192.168.%';
 ### pt-table-sync
 
 ```
-    修复数据不一致的表
-    pt-table-sync --replicate=gao.checksums --charset=utf8 h=192.168.1.152,u=pt_user,p=pt_pass  h=192.168.1.159,u=pt_user,p=pt_pass --execute --print
+修复数据不一致的表
+pt-table-sync --replicate=gao.checksums --charset=utf8 h=192.168.1.152,u=pt_user,p=pt_pass  h=192.168.1.159,u=pt_user,p=pt_pass --execute --print
 
 ```   
     
