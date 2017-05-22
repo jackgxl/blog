@@ -24,7 +24,7 @@ make install
 pt-table-checksum --version
 返回版本信息 即表明安装正确
 ```
-## tp-tools 使用说明
+## pt-tools 使用说明
 ### pt-table-checksum
 #### 主库操作 所有从库全部更新（适合一主一从）
 
