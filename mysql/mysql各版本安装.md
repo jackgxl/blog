@@ -688,7 +688,7 @@ group_replication_allow_local_disjoint_gtids_join= on 强制加入兼容组 进�
 ```
 跳过一个gtid复制
 stop slave;
-set next_gtid='';
+set next_gtid='XXXX...';
 begin;commmit;
 set next_gtid='AUTOMATIC'
 start slave;
