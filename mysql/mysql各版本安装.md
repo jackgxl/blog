@@ -334,6 +334,11 @@ drwx------ 2 mysql mysql          6 Feb 15 16:29 test
 ```
 #### 启动mysql
 ```
+修改启动脚本：
+vim bin/mysql.server
+
+$bindir/mysqld_safe --defaults-file=/data/mysql5634_3308/etc/my.cnf --datadir=$datadir --pid-file=$server_pid_file $other_args >/dev/null 2>&1 &
+
 ./bin/mysql.server start
 设置密码：
 ./bin/mysql -uroot
@@ -399,7 +404,23 @@ cmake \
 /data/msyql3306/bin/mysqld --defaults-file=etc/my.cnf --user=mysql --initialize-insecure 
 ```
 
-#### 配置文件
+#### 启动mysql
+```
+修改启动脚本：
+vim bin/mysql.server
+
+$bindir/mysqld_safe --defaults-file=/data/mysql3306/etc/my.cnf --datadir=$datadir --pid-file=$server_pid_file $other_args >/dev/null 2>&1 &
+
+./bin/mysql.server start
+设置密码：
+./bin/mysql -uroot -p'password_in_errorlog'
+alter user root@'localhost' identified by 'TEST123456' ;
+flush privileges;
+
+```
+
+
+#### 配置文件 (for MGR)
 
 **主库配置文件**
 
