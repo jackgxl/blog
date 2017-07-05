@@ -6,6 +6,14 @@
 wget https://codeload.github.com/akopytov/sysbench/tar.gz/1.0.4
 ```
 
+### configure environament
+
+```
+yum -y install make automake libtool pkgconfig libaio-devel vim-common
+yum -y install mariadb-devel
+yum -y install postgresql-devel
+```
+
 ### install steps
 
 * unpack the tar packages
@@ -29,7 +37,7 @@ Automade with: automake (GNU automake) 1.13.4
 Configured with: autoconf (GNU Autoconf) 2.69
 
 
-./configure --with-mysql-libs=/ssd/mysql3306/lib/ --with-mysql-includes=/ssd/mysql3306/include/
+./configure --with-mysql-libs=/ssd/mysql3306/lib/ --with-mysql-includes=/ssd/mysql3306/include/ --with-pgsql
 
 make -j 12
 
@@ -49,10 +57,10 @@ installed successed
 ### use sysbench test mysql5.6.34
 
 ```
-sysbench /root/sysbench-1.0.4/src/lua/oltp_read_write.lua  --mysql-host=localhost --mysql-port=3306  --mysql-user=root --mysql-password=213456 --mysql-socket=/ssd/mysql3306/tmp/mysql.sock --mysql-db=db1  --tables=10 --table-size=500000 --threads=50 --report-interval=5 --time=300 prepare
+sysbench /root/sysbench-1.0.4/src/lua/oltp_read_write.lua --db-driver=mysql --mysql-host=localhost --mysql-port=3306  --mysql-user=root --mysql-password=213456 --mysql-socket=/ssd/mysql3306/tmp/mysql.sock --mysql-db=db1  --tables=10 --table-size=500000 --threads=50 --report-interval=5 --time=300 prepare
 
 
-sysbench /root/sysbench-1.0.4/src/lua/oltp_write_only.lua  --mysql-host=localhost --mysql-port=3306  --mysql-user=root --mysql-password=213456 --mysql-socket=/ssd/mysql3306/tmp/mysql.sock --mysql-db=db1  --tables=10 --table-size=500000 --threads=50 --report-interval=5 --time=300 run
+sysbench /root/sysbench-1.0.4/src/lua/oltp_write_only.lua  --db-driver=mysql --mysql-host=localhost --mysql-port=3306  --mysql-user=root --mysql-password=213456 --mysql-socket=/ssd/mysql3306/tmp/mysql.sock --mysql-db=db1  --tables=10 --table-size=500000 --threads=50 --report-interval=5 --time=300 run
 
 SQL statistics:    queries performed:        read:                            4128628        write:                           1179608        other:                           589804        total:                           5898040    transactions:                        294902 (982.88 per sec.)    queries:                             5898040 (19657.55 per sec.)    ignored errors:                      0      (0.00 per sec.)    reconnects:                          0      (0.00 per sec.)General statistics:    total time:                          300.0347s    total number of events:              294902
 ```
