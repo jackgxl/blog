@@ -19,12 +19,21 @@ wget http://download.redis.io/releases/redis-3.2.8.tar.gz
 ```
 yum install gcc gcc-c++ tcl.x86_64 tcl-devel.x86_64 -y
 ```
+
+### 内核调整
+
+```
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+echo 1024 >/proc/sys/net/core/somaxconn
+
+```
+
 ### 编译安装
 ```
 cd redis-3.2.8
 make
 make test
-make install
+make PREFIX=/usr/local/redis328 install
 ```
 ### 验证安装
 ```
@@ -46,8 +55,43 @@ vim redis.conf
 
 redis-server etc/redis.conf
 ```
+### 关闭服务
 
+```
+/usr/local/bin/redis-cli -p port -h ipv4 -a 123 shutdown
+```
+### 监控
+
+```
+/usr/local/bin/redis-cli -p port -h ipv4 -a 123 info 
+
+```
 **安装完毕**
+
+# redis-sentinel
+
+### sentinel 配置
+```
+port 5000
+daemonize yes
+logfile "/data/redis7001/log/sentinel.log"
+dir "/data/redisi7001"
+sentinel monitor mymaster 127.0.0.1 6379 2
+sentinel auth-pass mymaster 123456
+sentinel down-after-milliseconds mymaster 5000
+sentinel failover-timeout mymaster 60000
+sentinel parallel-syncs mymaster 1
+```
+
+### sentinel启动
+
+```
+redis-sentinel /data/redis/etc/sentinel.conf
+```
+
+###  sentinel关闭
+
+
 
 ***
 ## memcache
