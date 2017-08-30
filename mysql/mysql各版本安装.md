@@ -20,7 +20,7 @@ useradd -M -s /sbin/nologin  mysql
 配置依赖环境：
 
 ```
-yum install  gcc gcc-c++ cmake  make  autoconf automake ncurses-devel zlib zlib-devel libxml2 libxml2-devel libaio.x86_64 libaio-devel.x86_64 readline.x86_64 readline-devel.x86_64
+yum install  gcc gcc-c++ cmake  make  autoconf automake ncurses-devel zlib zlib-devel libxml2 libxml2-devel libaio.x86_64 libaio-devel.x86_64 readline.x86_64 readline-devel.x86_64 numactl numactl-lib numactl-dev
 ```
 配置系统环境：
 	
@@ -393,6 +393,7 @@ cmake \
 -DENABLED_LOCAL_INFILE=1 \
 -DMYSQL_DATADIR=/data/mysql3306/var \
 -DMYSQL_USER=mysql \
+-DWITH_NUMA=on \
 -DMYSQL_TCP_PORT=3306 \
 -DENABLE_DOWNLOADS=1 \
 -DWITH_BOOST=boost/boost_1_59_0/ 
