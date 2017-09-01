@@ -109,17 +109,17 @@ start salve;
         
         ```
         mysql> show variables like '%semi%';
-+-------------------------------------------+------------+
-| Variable_name                             | Value      |
-+-------------------------------------------+------------+
-| rpl_semi_sync_master_enabled              | ON         |
-| rpl_semi_sync_master_timeout              | 10000      |
-| rpl_semi_sync_master_trace_level          | 32         |
-| rpl_semi_sync_master_wait_for_slave_count | 1          |
-| rpl_semi_sync_master_wait_no_slave        | ON         |
-| rpl_semi_sync_master_wait_point           | AFTER_SYNC |
-+-------------------------------------------+------------+
-6 rows in set (0.01 sec)
+        +-------------------------------------------+------------+
+        | Variable_name                             | Value      |
+        +-------------------------------------------+------------+
+        | rpl_semi_sync_master_enabled              | ON         |
+        | rpl_semi_sync_master_timeout              | 10000      |
+        | rpl_semi_sync_master_trace_level          | 32         |
+        | rpl_semi_sync_master_wait_for_slave_count | 1          |
+        | rpl_semi_sync_master_wait_no_slave        | ON         |
+        | rpl_semi_sync_master_wait_point           | AFTER_SYNC |
+        +-------------------------------------------+------------+
+        6 rows in set (0.01 sec)
         
         ```
         
@@ -139,13 +139,13 @@ start salve;
             
         ```
         mysql> show variables like '%semi%';
-+---------------------------------+-------+
-| Variable_name                   | Value |
-+---------------------------------+-------+
-| rpl_semi_sync_slave_enabled     | ON    |
-| rpl_semi_sync_slave_trace_level | 32    |
-+---------------------------------+-------+
-2 rows in set (0.00 sec)    
+        +---------------------------------+-------+
+        | Variable_name                   | Value |
+        +---------------------------------+-------+
+        | rpl_semi_sync_slave_enabled     | ON    |
+        | rpl_semi_sync_slave_trace_level | 32    |
+        +---------------------------------+-------+
+        2 rows in set (0.00 sec)    
         ```
         ```
         2017-09-01T08:29:17.811669Z 9 [Note] Slave I/O thread: Start semi-sync replication to master 'backup@192.168.64.152:3309' in log 'mysql-bin.000003' at position 59524
