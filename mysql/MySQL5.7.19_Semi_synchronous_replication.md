@@ -126,13 +126,13 @@ start salve;
         ```
         
         2017-09-01T06:49:52.046233Z 1633 [Note] Start binlog_dump to master_thread_id(1633) slave_server(1593309), pos(mysql-bin.000003, 59524)
-2017-09-01T08:27:10.657347Z 1620 [Note] Semi-sync replication initialized for transactions.
-2017-09-01T08:27:10.657421Z 1620 [Note] Semi-sync replication enabled on the master.
-2017-09-01T08:27:10.657752Z 0 [Note] Starting ack receiver thread
-2017-09-01T08:29:17.822324Z 1642 [Note] While initializing dump thread for slave with UUID <954acfee-8d64-11e7-a242-14feb5c77bf3>, found a zombie dump thread with the same UUID. Master is killing the zombie dump thread(1633).
-2017-09-01T08:29:17.822466Z 1642 [Note] Start binlog_dump to master_thread_id(1642) slave_server(1593309), pos(mysql-bin.000003, 59524)
-2017-09-01T08:29:17.822518Z 1633 [Note] Stop asynchronous binlog_dump to slave (server_id: 1593309)
-2017-09-01T08:29:17.822524Z 1642 [Note] Start semi-sync binlog_dump to slave (server_id: 1593309), pos(mysql-bin.000003, 59524)
+        2017-09-01T08:27:10.657347Z 1620 [Note] Semi-sync replication initialized for transactions.
+        2017-09-01T08:27:10.657421Z 1620 [Note] Semi-sync replication enabled on the master.    
+        2017-09-01T08:27:10.657752Z 0 [Note] Starting ack receiver thread
+        2017-09-01T08:29:17.822324Z 1642 [Note] While initializing dump thread for slave with UUID <954acfee-8d64-11e7-a242-14feb5c77bf3>, found a zombie dump thread with the same UUID. Master is killing the zombie dump thread(1633).
+        2017-09-01T08:29:17.822466Z 1642 [Note] Start binlog_dump to master_thread_id(1642) slave_server(1593309), pos(mysql-bin.000003, 59524)
+        2017-09-01T08:29:17.822518Z 1633 [Note] Stop asynchronous binlog_dump to slave (server_id: 1593309)
+        2017-09-01T08:29:17.822524Z 1642 [Note] Start semi-sync binlog_dump to slave (server_id: 1593309), pos(mysql-bin.000003, 59524)
 
         ```
         * Slave
