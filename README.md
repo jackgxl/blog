@@ -2,7 +2,7 @@
 
 ## mysql
 *  mysql documents
-*  各个版本编译安装
+*  各个版本编译安装 mysql\_multi-version_compilation\_and\_installation
 
     ```
         * MySQL5.1
