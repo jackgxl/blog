@@ -4,7 +4,9 @@
 
 **Compile installation reference**
 
-<a herf="https://github.com/jackgxl/uplearning/blob/master/mysql/mysql_multi-version_compilation_and_installation.md#mysql5717--mgr"> MySQL5.7_installation </a>
+<a href="https://github.com/jackgxl/uplearning/blob/master/mysql/mysql_multi-version_compilation_and_installation.md#mysql5717--mgr" > MySQL5.7_installation </a>
+
+[MySQL5.7_installation](https://github.com/jackgxl/uplearning/blob/master/mysql/mysql_multi-version_compilation_and_installation.md#mysql5717--mgr)
 
 ### MySQL_M-S 
 
