@@ -1,6 +1,5 @@
 # MySQL5.7.19\_Semi\_synchronous\_replication
 
----
 ### MySQL5.7.19 installation
 
 **Compile installation reference**
@@ -13,6 +12,7 @@
 * Show master status
     
 ```
+
 mysql> show master status;
 +------------------+----------+--------------+------------------+-------------------+
 | File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
@@ -59,20 +59,20 @@ start salve;
         ```
         
         mysql> show plugins;
-+----------------------------+----------+--------------------+-------------------+---------+
-| Name                       | Status   | Type               | Library           | License |
-+----------------------------+----------+--------------------+-------------------+---------+
-| rpl_semi_sync_slave        | ACTIVE   | REPLICATION        | semisync_slave.so | GPL     |
-+----------------------------+----------+--------------------+-------------------+---------+
+        +----------------------------+----------+--------------------+-------------------+---------+
+        | Name                       | Status   | Type               | Library           | License |
+        +----------------------------+----------+--------------------+-------------------+---------+
+        | rpl_semi_sync_slave        | ACTIVE   | REPLICATION        | semisync_slave.so | GPL     |
+        +----------------------------+----------+--------------------+-------------------+---------+
         
        OR
         
         mysql> SELECT PLUGIN_NAME, PLUGIN_STATUS FROM INFORMATION_SCHEMA.PLUGINS  WHERE PLUGIN_NAME LIKE '%semi%';
-+----------------------+---------------+
-| PLUGIN_NAME          | PLUGIN_STATUS |
-+----------------------+---------------+
-| rpl_semi_sync_master | ACTIVE        |
-+----------------------+---------------+
+        +----------------------+---------------+
+        | PLUGIN_NAME          | PLUGIN_STATUS |
+        +----------------------+---------------+
+        | rpl_semi_sync_master | ACTIVE        |
+        +----------------------+---------------+
         
         ```
         
@@ -81,27 +81,26 @@ start salve;
     * Master
         
         ```
-        
         mysql> SET GLOBAL rpl_semi_sync_master_enabled = 1;
-Query OK, 0 rows affected (0.00 sec)
+        Query OK, 0 rows affected (0.00 sec)
         ```
         
     * Slave
         
         ```
         mysql> SET GLOBAL rpl_semi_sync_slave_enabled = 1;
-Query OK, 0 rows affected (0.00 sec)
+        Query OK, 0 rows affected (0.00 sec)
         ```
     * Restart Slave
         
         ```
         mysql> show variables like '%semi%';
-+---------------------------------+-------+
-| Variable_name                   | Value |
-+---------------------------------+-------+
-| rpl_semi_sync_slave_enabled     | ON    |
-| rpl_semi_sync_slave_trace_level | 32    |
-+---------------------------------+-------+
+        +---------------------------------+-------+
+        | Variable_name                   | Value |
+        +---------------------------------+-------+
+        | rpl_semi_sync_slave_enabled     | ON    |
+        | rpl_semi_sync_slave_trace_level | 32    |
+        +---------------------------------+-------+
         ```
     * Check Semi_replication status
         
