@@ -57,6 +57,7 @@ start salve;
     * Check plugin
     
         ```
+        
         mysql> show plugins;
 +----------------------------+----------+--------------------+-------------------+---------+
 | Name                       | Status   | Type               | Library           | License |
@@ -80,6 +81,7 @@ start salve;
     * Master
         
         ```
+        
         mysql> SET GLOBAL rpl_semi_sync_master_enabled = 1;
 Query OK, 0 rows affected (0.00 sec)
         ```
@@ -123,6 +125,7 @@ Query OK, 0 rows affected (0.00 sec)
         ```
         
         ```
+        
         2017-09-01T06:49:52.046233Z 1633 [Note] Start binlog_dump to master_thread_id(1633) slave_server(1593309), pos(mysql-bin.000003, 59524)
 2017-09-01T08:27:10.657347Z 1620 [Note] Semi-sync replication initialized for transactions.
 2017-09-01T08:27:10.657421Z 1620 [Note] Semi-sync replication enabled on the master.
@@ -131,6 +134,7 @@ Query OK, 0 rows affected (0.00 sec)
 2017-09-01T08:29:17.822466Z 1642 [Note] Start binlog_dump to master_thread_id(1642) slave_server(1593309), pos(mysql-bin.000003, 59524)
 2017-09-01T08:29:17.822518Z 1633 [Note] Stop asynchronous binlog_dump to slave (server_id: 1593309)
 2017-09-01T08:29:17.822524Z 1642 [Note] Start semi-sync binlog_dump to slave (server_id: 1593309), pos(mysql-bin.000003, 59524)
+
         ```
         * Slave
             
