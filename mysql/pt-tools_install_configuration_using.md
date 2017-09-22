@@ -2,15 +2,19 @@
 ---
 ## 安装配置
 ### 下载pt-tools 安装包
+
 ```
 wget percona.com/get/percona-toolkit.tar.gz
 
 ```
 ### 解决环境依赖
+
 ```
 yum install perl perl-devel perl-Time-HiRes perl-DBI perl-DBD-MySQL perl-Digest-MD5
+
 ```
 ### 解压安装
+
 ```
 cd percona-toolkit-2.2.20/
 perl Makefile.PL
@@ -20,12 +24,16 @@ make install
 
 ```
 ### 验证安装
+
 ```
 pt-table-checksum --version
 返回版本信息 即表明安装正确
+
 ```
 ## pt-tools 使用说明
+
 ### pt-table-checksum
+
 #### 主库操作 所有从库全部更新（适合一主一从）
 
 ```
@@ -55,8 +63,10 @@ select db, tbl, sum(this_cnt) as total_rows, count(*) as chunks from checksums w
 * 主库创建用户：
 
     ```
-GRANT SELECT,LOCK TABLES,PROCESS,SUPER on *.* to pt_user@'192.168.%';
+    GRANT SELECT,LOCK TABLES,PROCESS,SUPER on *.* to pt_user@'192.168.%';
+    
     ```
+    
 * 从库创建用户：
 
     ```
