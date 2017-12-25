@@ -20,14 +20,18 @@ useradd -M -s /sbin/nologin  mysql
 配置依赖环境：
 
 ```
-yum install  gcc gcc-c++ cmake  make  autoconf automake ncurses-devel zlib zlib-devel libxml2 libxml2-devel libaio.x86_64 libaio-devel.x86_64 readline.x86_64 readline-devel.x86_64 numactl numactl-lib numactl-dev
+yum install  gcc gcc-c++ cmake  make  autoconf automake ncurses-devel zlib zlib-devel libxml2 libxml2-devel libaio.x86_64 libaio-devel.x86_64 readline.x86_64 readline-devel.x86_64 numactl numactl-devel.x86_64 numactl-libs.x86_64 
 ```
 配置系统环境：
 	
 	关闭NUMA
-	echo vm.swappiness = 0 >>/etc/sysctl.conf
+    echo vm.swappiness = 5 >>/etc/sysctl.conf
+    echo vm.dirty_background_ratio = 5 >>/etc/sysctl.conf
+    echo vm.dirty_ratio = 10 >>/etc/sysctl.conf
 	sysctl -p
 	echo deadline> /sys/block/sda/queue/scheduler
+	For SSD
+	echo noop> /sys/block/sda/queue/scheduler
 	vim /etc/security/limits.conf 
 		* soft nofile 65536
 		* hard nofile 65536
