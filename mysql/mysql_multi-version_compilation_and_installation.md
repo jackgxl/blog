@@ -24,19 +24,37 @@ yum install  gcc gcc-c++ cmake  make  autoconf automake ncurses-devel zlib zlib-
 ```
 配置系统环境：
 	
-	关闭NUMA
-    echo vm.swappiness = 5 >>/etc/sysctl.conf
-    echo vm.dirty_background_ratio = 5 >>/etc/sysctl.conf
-    echo vm.dirty_ratio = 10 >>/etc/sysctl.conf
-	sysctl -p
-	echo deadline> /sys/block/sda/queue/scheduler
-	For SSD
-	echo noop> /sys/block/sda/queue/scheduler
-	vim /etc/security/limits.conf 
-		* soft nofile 65536
-		* hard nofile 65536
-		* soft nproc 65535
-		* hard nproc 65535
+>```	
+>   关闭NUMA
+> 
+>   For SWAP (centos7)
+>   echo vm.swappiness = 5 >>/etc/sysctl.conf
+>   echo vm.dirty_background_ratio = 5 >>/etc/sysctl.conf
+>   echo vm.dirty_ratio = 10 >>/etc/sysctl.conf
+>   echo net.ipv4.tcp_tw_recycle = 1 >> /etc/sysctl.conf
+>   echo net.ipv4.tcp_tw_reuse = 1 >> /etc/sysctl.conf
+>   sysctl -p
+>	
+>	For SATA
+>	echo deadline> /sys/block/sda/queue/scheduler
+>	
+>	For SSD
+>	echo noop> /sys/block/sda/queue/scheduler
+>	
+>   LIMITS
+>	vim /etc/security/limits.conf 
+>		* soft nofile 65536
+>		* hard nofile 65536
+>		* soft nproc 65535
+>		* hard nproc 65535
+>
+>   XFS
+>   noatime, nodiratime, nobarrier
+>
+>
+>
+>
+>```
 
 ## mysql5.1
 
