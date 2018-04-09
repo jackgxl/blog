@@ -28,18 +28,18 @@ yum install  gcc gcc-c++ cmake  make  autoconf automake ncurses-devel zlib zlib-
 >   关闭NUMA
 > 
 >   For SWAP (centos7)
->   echo vm.swappiness = 5 >>/etc/sysctl.conf
->   echo vm.dirty_background_ratio = 5 >>/etc/sysctl.conf
->   echo vm.dirty_ratio = 10 >>/etc/sysctl.conf
->   echo net.ipv4.tcp_tw_recycle = 1 >> /etc/sysctl.conf
->   echo net.ipv4.tcp_tw_reuse = 1 >> /etc/sysctl.conf
+>   echo "vm.swappiness" = 5 >>/etc/sysctl.conf
+>   echo "vm.dirty_background_ratio" = 5 >>/etc/sysctl.conf
+>   echo "vm.dirty_ratio = 10" >>/etc/sysctl.conf
+>   echo "net.ipv4.tcp_tw_recycle" = 1 >> /etc/sysctl.conf
+>   echo "net.ipv4.tcp_tw_reuse" = 1 >> /etc/sysctl.conf
 >   sysctl -p
 >	
 >	For SATA
->	echo deadline> /sys/block/sda/queue/scheduler
+>	echo deadline > /sys/block/sda/queue/scheduler
 >	
 >	For SSD
->	echo noop> /sys/block/sda/queue/scheduler
+>	echo noop > /sys/block/sda/queue/scheduler
 >	
 >   LIMITS
 >	vim /etc/security/limits.conf 
@@ -50,10 +50,7 @@ yum install  gcc gcc-c++ cmake  make  autoconf automake ncurses-devel zlib zlib-
 >
 >   XFS
 >   noatime, nodiratime, nobarrier
->
->
->
->
+> 
 >```
 
 ## mysql5.1
@@ -101,13 +98,17 @@ make 和 make install看到 Making all in win 证明成功 也可以同步执行
 --prefix=/usr/local/mysql5172 \
 --localstatedir=/data/mysql5172 \
 --with-unix-socket-path=/usr/local/mysql5172/tmp/mysql.sock \
---with-plugins=partition,csv,archive,federated,innobase,innodb_plugin,myisam,heap \
+--with-plugins=all \
 --with-charset=utf8 \
 --without-docs \
 --without-man \
 --without-debug \
+--without-ndb-debug \
+--without-debug \
 --with-readline \
---with-client-ldflags=-static 'CFLAGS=-g -O3' 'CXXFLAGS=-g -O3' \
+--with-client-ldflags=-all-static \
+--with-mysqld-ldflags=-all-static \
+--with-pthread \
 --with-extra-charsets=all \
 --enable-assembler \
 --enable-local-infile \
