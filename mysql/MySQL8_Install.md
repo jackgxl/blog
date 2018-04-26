@@ -1,9 +1,11 @@
-#MySQL8.0.11 编译安装
+# MySQL8.0.11 编译安装
 
+ 
+### 下载安装包
 
-###下载源码包
+[选择源码包](https://dev.mysql.com/downloads/mysql/8.0.html)
 
-###配置编译环境
+### 配置编译环境
 ```
 yum install  gcc gcc-c++ cmake  make  autoconf automake \
 ncurses-devel zlib zlib-devel libxml2 libxml2-devel \
@@ -21,7 +23,7 @@ mkdir etc var log tmp
 
 cp /root/my.cnf  etc/
 ```
-###编译安装
+### 编译安装
 ```
 cmake \
 -DCMAKE_INSTALL_PREFIX=/data/mysql3308 \
@@ -50,7 +52,7 @@ make
 
 make install
 ```
-###初始化
+###  初始化
 ```
 cd /data/mysql3308
 chown -R mysql:mysql .
@@ -59,12 +61,12 @@ cp support-files/mysql.server bin/
 ./bin/mysqld --defaults-file=etc/my.cnf --user=mysql --initialize
 ```
 
-###启动实例
+###   启动实例
 ```
 ./bin/mysql.server start
 ```
 
-###连接实例
+###  连接实例
 ```
 /data/mysql3308/bin/mysql -uroot -pXXXXXXX
 使用--initialize 初始化 会在error日志中产生随机密码
@@ -75,7 +77,7 @@ alter user root@'lcoalhost' identified by 'XXXX';
 
 ```
 
-##参数文件
+####  参数文件
 ```
 
 [client]
@@ -150,7 +152,7 @@ max_relay_log_size       = 1G
 
 #####InnoDB setting###########
 
-innodb_page_size = 8192
+innodb_page_size = 16380
 default_storage_engine            = innodb
 default_tmp_storage_engine       = innodb
 innodb_buffer_pool_size = 4G
