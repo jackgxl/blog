@@ -99,7 +99,8 @@ socket = /data/mysql3308/tmp/mysql.sock
 pid-file = /data/mysql3308/var/mysql.pid
 tmpdir = /data/mysql3308/tmp
 secure-file-priv = '/data/mysql3308/tmp'
- 
+
+default_authentication_plugin=mysql_native_password 
 explicit_defaults_for_timestamp = 1
 auto_increment_increment = 1
 auto_increment_offset = 1
