@@ -52,6 +52,21 @@ sysbench 1.0.4 (using bundled LuaJIT 2.1.0-beta2)
 Cannot find script -V: No such file or directory
 
 installed successed
+
+```
+
+
+
+* Error_Tips:
+
+```
+[root@localhost ~]# /usr/local/bin/sysbench --version
+/usr/local/bin/sysbench: error while loading shared libraries: libmysqlclient.so.20: cannot open shared object file: No such file or directory
+
+[root@localhost ~]# ln -sv /usr/local/mysql3306/lib/libmysqlclient.so.20.3.9 /usr/lib64/mysql/libmysqlclient.so.20
+
+/sbin/ldconfig -v
+
 ```
 
 ### use sysbench test mysql5.6.34
