@@ -2,26 +2,26 @@
 
 ## 配置环境
 
-*  数据库软硬件配置
+* 数据库软硬件配置
 
-    | hostname| ip |system|MySQL|
-    | :----: | :--:|:--:|:--:|:--:|
-    |mgr1|192.168.64.152|CentOS7.3|MySQL8.0.11|
-    |mgr2|192.168.64.154|CentOS7.3|MySQL8.0.11|
-    |mgr3|192.168.64.159|CentOS7.3|MySQL8.0.11|
+| hostname| ip |system|MySQL|
+| :----: | :--:|:--:|:--:|:--:|
+|mgr1|192.168.64.152|CentOS7.3|MySQL8.0.11|
+|mgr2|192.168.64.154|CentOS7.3|MySQL8.0.11|
+|mgr3|192.168.64.159|CentOS7.3|MySQL8.0.11|
 
 * 修改hosts文件
   
-  修改mgr1,mgr2,mgr3服务器hosts文件
+修改mgr1,mgr2,mgr3服务器hosts文件
   
-  ```
-  [root@mgr1 ~]# cat /etc/hosts
+```
+[root@mgr1 ~]# cat /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 192.168.64.152  mgr1
 192.168.64.154  mgr2
 192.168.64.159  mgr3
-  ```
+```
 
 ## MGR 限制
 
