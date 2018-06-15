@@ -4,8 +4,8 @@
 
 * 数据库软硬件配置
 
-| hostname| ip |system|MySQL|
-| :----: | :--:|:--:|:--:|:--:|
+| hostname| ip      |system|MySQL         |
+| :-----: | :------:|:-------:|:---------:|
 |mgr1|192.168.64.152|CentOS7.3|MySQL8.0.11|
 |mgr2|192.168.64.154|CentOS7.3|MySQL8.0.11|
 |mgr3|192.168.64.159|CentOS7.3|MySQL8.0.11|
@@ -13,8 +13,8 @@
 * 修改hosts文件
   
 修改mgr1,mgr2,mgr3服务器hosts文件
-  
-```
+
+``` shell
 [root@mgr1 ~]# cat /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
@@ -66,14 +66,14 @@ CHANGE MASTER TO MASTER_USER='rep', MASTER_PASSWORD='rep' FOR CHANNEL 'group_rep
 
 * 安装组复制插件
 
-```
+``` sql
 INSTALL PLUGIN group_replication SONAME 'group_replication.so';
 show plugins;
 ```
 
 * 单主启动
 
-```
+``` sql
 SET GLOBAL group_replication_bootstrap_group=ON;
 START GROUP_REPLICATION;
 SET GLOBAL group_replication_bootstrap_group=OFF;
@@ -81,14 +81,14 @@ SET GLOBAL group_replication_bootstrap_group=OFF;
 
 * 添加新复制实例
 
-```
+``` sql
 set global group_replication_allow_local_disjoint_gtids_join=ON;
 START GROUP_REPLICATION;
 ```
 
 * 验证集群
 
-```
+``` sql
 mysql(root@localhost:(none))>SELECT * FROM performance_schema.replication_group_members;
 +---------------------------+--------------------------------------+-------------+-------------+--------------+-------------+----------------+
 | CHANNEL_NAME              | MEMBER_ID                            | MEMBER_HOST | MEMBER_PORT | MEMBER_STATE | MEMBER_ROLE | MEMBER_VERSION |
