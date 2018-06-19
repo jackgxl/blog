@@ -9,9 +9,8 @@ wget https://codeload.github.com/akopytov/sysbench/tar.gz/1.0.4
 ### configure environament
 
 ```
-yum -y install make automake libtool pkgconfig libaio-devel vim-common
-yum -y install mariadb-devel
-yum -y install postgresql-devel
+yum -y install make automake libtool pkgconfig libaio-devel vim-common mariadb-devel
+ install postgresql-devel
 ```
 
 ### install steps
