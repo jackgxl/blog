@@ -101,6 +101,45 @@ mysql(root@localhost:(none))>SELECT * FROM performance_schema.replication_group_
 ```
 
 * 多主启动
+    
+    * 配置文件
+        
+        ```
+        loose-group_replication_single_primary_mode=FALSE
+        loose-group_replication_enforce_update_everywhere_checks= TRUE
+        ```   
+    
+    
+    * 启动第一个节点
+    
+        ```
+        SET GLOBAL group_replication_bootstrap_group = ON;
+              
+        START GROUP_REPLICATION;
+        
+        SET GLOBAL group_replication_bootstrap_group=OFF;
+        
+        SELECT * FROM performance_schema.replication_group_members;
+        ```
+    
+    * 启动其他节点
 
+        ```
+        START GROUP_REPLICATION;
+        ```    
+    
+    * 验证集群
+    
+        ```
+        SELECT * FROM performance_schema.replication_group_members;
+        ```
 
 ### TIPs：
+
+[官方文档]
+
+[参考文档]
+
+[官方文档]:https://dev.mysql.com/doc/refman/8.0/en/group-replication.html
+
+[参考文档]:https://blog.csdn.net/mchdba/article/details/54381854
