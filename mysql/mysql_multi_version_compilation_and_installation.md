@@ -20,7 +20,13 @@ useradd -M -s /sbin/nologin  mysql
 配置依赖环境：
 
 ```
-yum install  gcc gcc-c++ cmake  make  autoconf automake ncurses-devel zlib zlib-devel libxml2 libxml2-devel libaio.x86_64 libaio-devel.x86_64 readline.x86_64 readline-devel.x86_64 numactl numactl-devel.x86_64 numactl-libs.x86_64 
+yum install  gcc gcc-c++ cmake  make  autoconf automake ncurses-devel zlib zlib-devel libxml2 libxml2-devel libaio.x86_64 libaio-devel.x86_64 readline.x86_64 readline-devel.x86_64 numactl numactl-devel.x86_64 numactl-libs.x86_64
+```
+
+分析工具
+
+```
+yum install -y tcpdump strace psmisc.x86_64 gdb
 ```
 配置系统环境：
 	
