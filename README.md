@@ -1,7 +1,9 @@
 # 一些学习笔记
 
-## mysql
-*  mysql documents
+**建议使用Typora打开**
+
+## MySQL
+*  MySQL documents
 *  各个版本编译安装 mysql\_multi-version_compilation\_and\_installation
 
     * MySQL5.1
@@ -11,9 +13,13 @@
     * MySQL8.0.11
     * MGR
 
-## nosql:
+## PostgreSQL
+* PostgreSQL documents
 
-* nosql documents
+
+## NOSQL:
+
+* NOSQL documents
     * Redis
     * Memcached
     * MongoDB
