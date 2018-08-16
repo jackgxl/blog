@@ -399,3 +399,77 @@ Monetary Types:
 
 ##  逻辑结构
 
+**锁**
+
+* 查看锁
+
+    ```sql
+    select * from pg_locks;
+    ``` 
+    
+
+## 核心架构
+
+Postmaster 主进程
+
+查看服务进程 pid 
+
+```sql
+select pid from pg_stat_activity ;
+
+```
+
+Syslogger (系统日志)进程
+
+```
+开启配置文件postgresql.conf中logging_collect设置为on
+```
+
+BgWriter(后台写)进程
+
+WalWriter(预写式日志写)进程
+
+PgArch(归档)进程
+
+AutoVacuum(自动清理)进程
+
+Pgstat(统计数据收集)进程
+
+共享内存
+
+本地内存
+
+## 服务管理
+
+* 配置文件
+
+* 备份恢复
+
+* 逻辑备份
+
+    ```
+    pg_dump
+    pg_restore
+    ```
+
+* 物理备份
+    
+    ```
+    Standby
+    LVM
+    ```
+
+## 执行计划
+* explain
+
+```
+explain (format json) select * from test;
+xml
+YAML
+```
+
+* 
+
+
+
+
