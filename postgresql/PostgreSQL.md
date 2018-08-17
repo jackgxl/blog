@@ -468,7 +468,27 @@ xml
 YAML
 ```
 
-* 
+## 体系结构
+
+* vacuum
+
+```
+VACUUM [ FULL ] [ FREEZE ] [ VERBOSE ] [ table ] 
+
+VACUUM [ FULL ] [ FREEZE ] [ VERBOSE ] ANALYZE [ table [ (column [, ...] ) ] ] 
+
+vacuum 、vacuum full、vacuum analyze、autovacuum 命令的区别 
+
+vacuum          只是将删除状态的空间释放掉，转换到能够重新使用的状态，但是它不进行空间合并。 
+
+vacuum full     将会使空间释放的信息表现在系统级别，其实质是将当前删除记录后面的数据进行移动，使得整体的记录连贯 
+
+                起来，降低了“高水位标记”。因此它需要lock table。 
+
+vacuum analyze  更新统计信息，使得优化器能够选择更好的方案执行sql。 
+
+autovacuum      数据库定时自动进行vacuum 
+``` 
 
 
 
