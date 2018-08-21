@@ -323,9 +323,13 @@ yum install perl-DBD-MySQL perl-Config-Tiny perl-Log-Dispatch perl-Parallel-Fork
 ```
 yum install perl-Config-Tiny perl-Log-Dispatch perl-Parallel-ForkManager perl-Time-HiRes
 
+wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
+yum install epel-release-latest-7.noarch.rpm
 
 wget https://github.com/yoshinorim/mha4mysql-node/releases/download/v0.58/mha4mysql-node-0.58-0.el7.centos.noarch.rpm
 
 wget https://github.com/yoshinorim/mha4mysql-manager/releases/download/v0.58/mha4mysql-manager-0.58-0.el7.centos.noarch.rpm
+
+yum install mha4mysql-node-0.58-0.el7.centos.noarch.rpm mha4mysql-manager-0.58-0.el7.centos.noarch.rpm -y
 ```
