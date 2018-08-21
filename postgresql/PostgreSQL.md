@@ -493,3 +493,46 @@ autovacuum      数据库定时自动进行vacuum
 
 
 
+## 开源工具
+
+* Standby
+
+    ```
+    Stream 复制
+    ```
+* PgBouncer
+
+    ```
+     PG连接池 
+    ```
+
+* Slony-I
+
+    ```
+    集群插件
+    ```
+
+* Bucardo
+
+    ```
+    双向同步，触发器，单库单表复制
+    ```
+
+* PL/Proxy
+
+    ```
+    水平拆分，路由
+    ```
+
+* pgpool-II
+
+    ```
+    连接池，复制，读写分离，并行查询，自动负载均衡，自动Failover
+    ```
+
+* Postgres-XC
+
+    ```
+    完全兼容，PG 集群，无中心节点
+    ```
+
