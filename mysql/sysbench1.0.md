@@ -9,8 +9,7 @@ wget https://codeload.github.com/akopytov/sysbench/tar.gz/1.0.4
 ### configure environament
 
 ```
-yum -y install make automake libtool pkgconfig libaio-devel vim-common mariadb-devel
- install postgresql-devel
+yum -y install make automake libtool pkgconfig libaio-devel vim-common mariadb-devel postgresql-devel
 ```
 
 ### install steps
@@ -35,8 +34,9 @@ Libtoolized with: libtoolize (GNU libtool) 2.4.2
 Automade with: automake (GNU automake) 1.13.4
 Configured with: autoconf (GNU Autoconf) 2.69
 
+./configure --with-mysql --with-pgsql
 
-./configure --with-mysql-libs=/ssd/mysql3306/lib/ --with-mysql-includes=/ssd/mysql3306/include/ --with-pgsql
+./configure --with-mysql-libs=/data/mysql3306/lib/ --with-mysql-includes=/data/mysql3306/include/ --with-pgsql
 
 make -j 12
 
@@ -45,7 +45,7 @@ make install
 
 test for install
 
-sysbench -V
+sysbench --version
 sysbench 1.0.4 (using bundled LuaJIT 2.1.0-beta2)
 
 Cannot find script -V: No such file or directory
