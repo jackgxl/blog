@@ -1,5 +1,10 @@
 # MySQL5.7 JSON索引
 
+[TOC]
+
+
+
+
 ### 表结构
 ```
 mysql> show create table test_json \G
