@@ -406,15 +406,45 @@ MariaDB [test_db]> select * from t2 order by id;
 * 创建
     
     ```
+    MariaDB [test_db]> create sequence seq1 start with 1;
+Query OK, 0 rows affected (0.003 sec)
     ```
 
 * 使用
-* 验证
-* 作用
+
+    ```
+    MariaDB [test_db]> insert into t2 values(nextval(seq1),2,'testseq1','testseq1');
+Query OK, 1 row affected (0.003 sec)
+    ```
     
+* 验证
+
     ```
-    解决表自增问题
+    MariaDB [test_db]> select * from t2 order by id;
++----+---+----------+----------+
+| id | k | c        | pad      |
++----+---+----------+----------+
+|  2 | 2 | testseq1 | testseq1 |
+|  3 | 2 | testseq1 | testseq1 |
+|  4 | 2 | testseq1 | testseq1 |
+|  5 | 2 | testseq1 | testseq1 |
+|  6 | 2 | testseq1 | testseq1 |
+|  7 | 2 | testseq1 | testseq1 |
+|  8 | 2 | testseq1 | testseq1 |
+|  9 | 2 | testseq1 | testseq1 |
+| 10 | 2 | testseq1 | testseq1 |
+| 11 | 2 | testseq1 | testseq1 |
+| 12 | 2 | testseq1 | testseq1 |
+| 13 | 2 | testseq1 | testseq1 |
+| 14 | 2 | testseq1 | testseq1 |
++----+---+----------+----------+
+13 rows in set (0.007 sec)
     ```
+
+Tips:
+
+* Spider 可以用分库分表，但性能较单机差
+* Spider 适合做异构数据聚合，适合数据分析
 
 # Reference
 
@@ -425,3 +455,5 @@ MariaDB [test_db]> select * from t2 order by id;
 [https://zhuanlan.zhihu.com/p/47418626?utm_source=qq&utm_medium=social&utm_oi=72613187551232]()
 
 [https://www.centos.bz/2017/12/mariadb-galera-cluster%E9%9B%86%E7%BE%A4%E4%BC%98%E7%BC%BA%E7%82%B9/](https://www.centos.bz/2017/12/mariadb-galera-cluster%E9%9B%86%E7%BE%A4%E4%BC%98%E7%BC%BA%E7%82%B9/)
+
+[https://mariadb.com/kb/en/library/sequence-overview/#replication](https://mariadb.com/kb/en/library/sequence-overview/#replication)
