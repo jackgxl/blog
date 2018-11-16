@@ -61,7 +61,6 @@ MariaDB [mysql]> show plugins;
 
 ```
 MariaDB [db3]> show variables like '%spider%';
-
 ```
 
 
@@ -264,17 +263,19 @@ MariaDB [test_db]> select * from t1;
 
         ```
         create server backend2 foreign data wrapper mysql options(host '192.168.64.182',database 'test_db',user 'gao',password 'gao',port 5723);
+create server backend5 foreign data wrapper mysql options(host '192.168.64.157',database 'test_db',user 'gao',password 'gao',port 3307);
         验证
-        MariaDB [test_db]> select * from mysql.servers where Server_name in( 'backend2');           
+        MariaDB [test_db]> select * from mysql.servers where Server_name in( 'backend5','backend2'); 
 +-------------+----------------+---------+----------+----------+------+--------+---------+-------+
 | Server_name | Host           | Db      | Username | Password | Port | Socket | Wrapper | Owner |
 +-------------+----------------+---------+----------+----------+------+--------+---------+-------+
 | backend2    | 192.168.64.182 | test_db | gao      | gao      | 5723 |        | mysql   |       |
+| backend5    | 192.168.64.157 | test_db | gao      | gao      | 3307 |        | mysql   |       |
 +-------------+----------------+---------+----------+----------+------+--------+---------+-------+
-1 row in set (0.001 sec)
+2 rows in set (0.001 sec)
         ```
         
-    * 直接插入mysql.servers表，flush hosts 生效 。
+    * 直接插入mysql.servers表
 
         ```
     MariaDB [test_db]> insert into mysql.servers (Server_name,Host,Db,Username,Password,Port,Socket,Wrapper,Owner) values('backend1','192.168.64.157','test_db','gao','gao',3307,'','mysql','');
@@ -287,8 +288,133 @@ MariaDB [test_db]> select * from mysql.servers where Server_name = 'backend1';
 | backend1    | 192.168.64.157 | test_db | gao      | gao      | 3307 |        | mysql   |       |
 +-------------+----------------+---------+----------+----------+------+--------+---------+-------+
 1 row in set (0.001 sec)
+flush hosts 没有生效 此方法暂保留。
         ```
+    * 验证
+        * backend1 & backend2
+        
+        ```
+        CREATE  TABLE test_db.t2
+(
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  k int(10) unsigned NOT NULL DEFAULT '0',
+  c char(120) NOT NULL DEFAULT '',
+  pad char(60) NOT NULL DEFAULT '',
+  PRIMARY KEY (id),
+  KEY k (k)
+) ;
+        ```
+        
+        * spider
 
+        ```
+        CREATE  TABLE test_db.t2
+(
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  k int(10) unsigned NOT NULL DEFAULT '0',
+  c char(120) NOT NULL DEFAULT '',
+  pad char(60) NOT NULL DEFAULT '',
+  PRIMARY KEY (id),
+  KEY k (k)
+) ENGINE=spider COMMENT='wrapper "mysql", table "t2"'
+ PARTITION BY KEY (id) 
+(
+ PARTITION pt1 COMMENT = 'srv "backend5"',
+ PARTITION pt2 COMMENT = 'srv "backend2"' 
+) ;
+        ```
+        
+    * 验证数据
+        * spider
+        
+            ```
+        MariaDB [test_db]> insert into t2 values(1,1,'test','test');
+Query OK, 1 row affected (0.030 sec)
+MariaDB [test_db]> select * from t2;
++----+---+------+------+
+| id | k | c    | pad  |
++----+---+------+------+
+|  1 | 1 | test | test |
+|  3 | 1 | test | test |
+|  5 | 1 | test | test |
+|  7 | 1 | test | test |
+|  9 | 1 | test | test |
+| 11 | 1 | test | test |
+|  2 | 1 | test | test |
+|  4 | 1 | test | test |
+|  6 | 1 | test | test |
+|  8 | 1 | test | test |
+| 10 | 1 | test | test |
++----+---+------+------+
+11 rows in set (0.007 sec)
+MariaDB [test_db]> select * from t2 order by id;
++----+---+------+------+
+| id | k | c    | pad  |
++----+---+------+------+
+|  1 | 1 | test | test |
+|  2 | 1 | test | test |
+|  3 | 1 | test | test |
+|  4 | 1 | test | test |
+|  5 | 1 | test | test |
+|  6 | 1 | test | test |
+|  7 | 1 | test | test |
+|  8 | 1 | test | test |
+|  9 | 1 | test | test |
+| 10 | 1 | test | test |
+| 11 | 1 | test | test |
++----+---+------+------+
+11 rows in set (0.008 sec)
+```
+
+        * backend2 & backend5
+            * backed2
+        
+                ```
+                mysql(root@localhost:test_db)>select * from t2;
++----+---+------+------+
+| id | k | c    | pad  |
++----+---+------+------+
+|  2 | 1 | test | test |
+|  4 | 1 | test | test |
+|  6 | 1 | test | test |
+|  8 | 1 | test | test |
+| 10 | 1 | test | test |
++----+---+------+------+
+5 rows in set (0.00 sec)
+
+                ```
+                
+            * backend5
+
+                ```
+                mysql(test_db)>select * from t2;
++----+---+------+------+
+| id | k | c    | pad  |
++----+---+------+------+
+|  1 | 1 | test | test |
+|  3 | 1 | test | test |
+|  5 | 1 | test | test |
+|  7 | 1 | test | test |
+|  9 | 1 | test | test |
+| 11 | 1 | test | test |
++----+---+------+------+
+6 rows in set (0.00 sec)
+
+                ```
+
+# sequence
+* 创建
+    
+    ```
+    ```
+
+* 使用
+* 验证
+* 作用
+    
+    ```
+    解决表自增问题
+    ```
 
 # Reference
 
