@@ -25,29 +25,29 @@ systemctl status docker
 * 拉取docker镜像
 
     ```
-docker pull percona/pmm-server:latest
-\
-[root@localhost data]# docker images;
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-[root@localhost data]# docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-[root@localhost data]# docker ps
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-[root@localhost data]# docker pull percona/pmm-server:latest
-latest: Pulling from percona/pmm-server
-aeb7866da422: Pull complete 
-cc3feb415dc3: Pull complete 
-Digest: sha256:92092866dcfaabd6aac4d2754a4094967ea42864faf2434811232181a9f755dc
-Status: Downloaded newer image for percona/pmm-server:latest
-[root@localhost data]# 
+    docker pull percona/pmm-server:latest
+    [root@localhost data]# docker images;
+    REPOSITORY          TAG                 IMAGE ID        CREATED             SIZE
+    [root@localhost data]# docker images
+    REPOSITORY          TAG                 IMAGE ID        CREATED             SIZE
+    [root@localhost data]# docker ps
+    CONTAINER ID        IMAGE               COMMAND         
+    CREATED             STATUS              PORTS               NAMES
+    [root@localhost data]# docker pull percona/pmm-server:latest
+    latest: Pulling from percona/pmm-server
+    aeb7866da422: Pull complete 
+    cc3feb415dc3: Pull complete 
+    Digest: sha256:92092866dcfaabd6aac4d2754a4094967ea42864faf2434811232181a9f755dc
+    Status: Downloaded newer image for percona/pmm-server:latest
+    [root@localhost data]# 
+    ```
+
+
+##  PMM server 创建启动
+
+* 创建
+   
 ```
-
-
-* PMM server 创建启动
-
-    * 创建
-    
-        ```
 [root@localhost data]# docker images
 REPOSITORY           TAG                 IMAGE ID            CREATED             SIZE
 percona/pmm-server   latest              2ff436aaddc9        5 days ago          1.01GB
@@ -60,10 +60,11 @@ percona/pmm-server   latest              2ff436aaddc9        5 days ago         
 >    percona/pmm-server:latest /bin/true
 7c3ad76fe1203463b89065b2cf1bc51953fa621057a4ac8e55487f97a65e720f
 ```
-    * 启动
+
+* 启动
     
-        ```
-    [root@localhost data]# docker run -d -p 80:80 \
+```
+[root@localhost data]# docker run -d -p 80:80 \
 >   --volumes-from pmm-data \
 >   --name pmm-server \
 >   -e SERVER_USER=test \
@@ -75,11 +76,11 @@ percona/pmm-server   latest              2ff436aaddc9        5 days ago         
 CONTAINER ID        IMAGE                       COMMAND                CREATED             STATUS              PORTS                         NAMES
 4f89c180a56e        percona/pmm-server:latest   "/opt/entrypoint.sh"   7 seconds ago       Up 6 seconds        0.0.0.0:80->80/tcp, 443/tcp   pmm-server
 [root@localhost data]# 
-    ```
+```
 
-    * PMM server 启用Orchestrator
+* PMM server 启用Orchestrator
 
-        ```
+```
         [root@localhost data]# docker ps
 CONTAINER ID        IMAGE                       COMMAND                CREATED             STATUS              PORTS                         NAMES
 4f89c180a56e        percona/pmm-server:latest   "/opt/entrypoint.sh"   7 seconds ago       Up 6 seconds        0.0.0.0:80->80/tcp, 443/tcp   pmm-server
@@ -88,10 +89,11 @@ CONTAINER ID        IMAGE                       COMMAND                CREATED  
 [root@localhost data]# docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 [root@localhost data]# 
-        ```
+```
         
-        ```
-        docker run -d -p 80:80 \
+
+```
+docker run -d -p 80:80 \
   --volumes-from pmm-data \
   --name pmm-server \
   -e SERVER_USER=$user \
@@ -99,9 +101,10 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
   -e ORCHESTRATOR_ENABLED=true \
   --restart always \
   percona/pmm-server:latest
-        ```
+```
 
-# PMM agent 安装启动
+
+## PMM agent 安装启动
 
 ```
 yum install -y pmm-client-1.17.0-1.el7.x86_64.rpm 
