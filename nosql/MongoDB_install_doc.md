@@ -10,14 +10,11 @@ wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel70-4.0.5.tgz
 ## CentOS7 配置
 
 ```
+内核调整：
 never > /sys/kernel/mm/transparent_hugepage/enabled
 never > /sys/kernel/mm/transparent_hugepage/defrag
-echo "vm.swappiness = 5" >>/etc/sysctl.conf
-echo "vm.dirty_background_ratio = 5" >>/etc/sysctl.conf
-echo "vm.dirty_ratio = 10" >>/etc/sysctl.conf
-echo "net.ipv4.tcp_tw_recycle = 1" >> /etc/sysctl.conf
-echo "net.ipv4.tcp_tw_reuse = 1" >> /etc/sysctl.conf
-sysctl -p
+用户创建：
+
 ```
 
 ## MongoDB 副本集配置
