@@ -69,6 +69,40 @@ innobackupex --defaults-file=/data/mysql3307/etc/my.cnf --move-back /data/backup
 
 ```
 
+### 本地备份传送到远程存储
+
+* 备份到远程
+
+```
+innobackupex --defaults-file=/data/mysql3306/etc/my.cnf --user='root' --password='123456' --socket=/data/mysql3306/tmp/mysql.sock --safe-slave-backup  --slave-info --no-timestamp --use-memory=1G --compress --stream=xbstream /data/backup |ssh root@'172.16.64.154' "xbstream -x -C /data/backup/all"
+
+```
+
+* 解压
+
+```
+innobackupex --decompress all/
+```
+
+tips:
+
+```
+解压需要qpress 依赖
+tar zxf qpress-11-linux-x64.tar
+mv qpress /usr/local/bin/
+```
+
+* 恢复
+
+```
+innobackupex --defaults-file=/data/mysql5634_3308/etc/my.cnf --move-back /data/backup/all/
+```
+
+启动即可
+
+
+
+
 Tips:
 >   * defaults-file,user,password,socket 根据自己的实际配置修改
 >   * 如果有MyISAM大表,不要在主库操作,低峰备份。
