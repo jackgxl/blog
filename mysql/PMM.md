@@ -113,6 +113,30 @@ pmm-admin add mysql --user $user --password $passwd  --socket /path/to/mysql.soc
 ```
 
 
+### PMM agent 关闭
+
+```
+pmm-admin stop --all
+
+```
+
+### PMM 删除
+
+```shell
+# killall containers
+docker_kill(){
+    if [ -n "`docker ps -a -q`" ]; then
+        docker stop `docker ps -a -q`
+    fi
+    if [ -n "`docker ps -a -q`" ]; then
+        docker rm `docker ps -a -q`
+    fi
+}
+
+```
+
+
+
 ## references
 
 [https://segmentfault.com/a/1190000012030650](https://segmentfault.com/a/1190000012030650)
