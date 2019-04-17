@@ -273,7 +273,7 @@ esac
     rs.status();
     rs.conf();
     ```
-
+* 创建keyFile
 
 
 ## mongo_conf 配置
