@@ -37,6 +37,35 @@ build environment:
 
 ## 配置
 
+系统配置
+
+```
+[root@local-157 mongo7777]# vim /etc/security/limits.conf 
+ulimit -u 65500
+ulimit -n 65500
+
+* soft nofile 65535
+* hard nofile 65535
+* soft nproc 65535
+* hard nproc 65535
+
+
+mongod soft nofile 64000
+mongod hard nofile 64000
+mongod soft nproc 62000
+mongod hard nproc 62000
+
+[root@local-182 mongo7777]# vim /etc/security/limits.d/20-nproc.conf 
+# Default limit for number of user's processes to prevent
+# accidental fork bombs.
+# See rhbz #432903 for reasoning.
+
+*          soft    nproc     65000
+root       soft    nproc     unlimited
+```
+
+配置文件
+
 ```
 [root@arton157 mongo7777]# cat mongodb7777.conf 
 fork = true
