@@ -55,7 +55,7 @@ mongod hard nofile 64000
 mongod soft nproc 62000
 mongod hard nproc 62000
 
-[root@local-182 mongo7777]# vim /etc/security/limits.d/20-nproc.conf 
+[root@local-157 mongo7777]# vim /etc/security/limits.d/20-nproc.conf 
 # Default limit for number of user's processes to prevent
 # accidental fork bombs.
 # See rhbz #432903 for reasoning.
@@ -72,9 +72,9 @@ fork = true
 port = 7777
 quiet = true
 bind_ip = 0.0.0.0
-dbpath = /data/mongo7777
-unixSocketPrefix = /data/mongo7777
-pidfilepath = /data/mongo7777/mongodb7777.pid
+dbpath = /data/mongo7777/var
+unixSocketPrefix = /data/mongo7777/tmp
+pidfilepath = /data/mongo7777/var/mongodb7777.pid
 logpath = /data/mongo7777/log/mongod.log
 logappend = true
 journal = true
