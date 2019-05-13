@@ -7,16 +7,29 @@ yum install zlib zlib-devel bzip2 bzip2-devel lz4-devel libasan snappy snappy-de
 ```
 ## 编译安装
 
+下载安装包
 ```
 wget https://github.com/facebook/rocksdb/archive/v6.0.2.tar.gz
 mv v6.0.2.tar.gz rocksdb-v6.0.2.tar.gz
 tar zxf rocksdb-6.0.2.tar.gz
 cd rocksdb-6.0.2
+```
 
+编译静态库，release mode，获得librocksdb.a
+
+```
 make static_lib
+```
 
+编译动态库，获得librocksdb.so，release mode，获得lbrocksdb.so
+
+```
 make shared_lib
+```
 
+编译到指定目录
+
+```
 mkdir build
 cd build
 
