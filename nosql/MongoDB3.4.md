@@ -70,7 +70,7 @@ root       soft    nproc     unlimited
 [root@arton157 mongo7777]# cat mongodb7777.conf 
 fork = true
 port = 7777
-quiet = true
+quiet = false
 bind_ip = 0.0.0.0
 dbpath = /data/mongo7777/var
 unixSocketPrefix = /data/mongo7777/tmp
