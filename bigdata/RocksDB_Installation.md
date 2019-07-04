@@ -4,6 +4,7 @@
 
 ```
 yum install zlib zlib-devel bzip2 bzip2-devel lz4-devel libasan snappy snappy-devel -y
+yum install snappy zlib bzip2 lz4 ASAN zstd 
 ```
 ## 编译安装
 
@@ -51,11 +52,12 @@ export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/rocksdb/lib64/
 ## 安装go客户端
 
 下载
+
 ```
 go get github.com/tecbot/gorocksdb
 ```
 
-报错类型
+* 报错类型
 
 ```shell
 [root@local-153 src]# go get github.com/tecbot/gorocksdb
@@ -64,11 +66,13 @@ github.com/tecbot/gorocksdb/array.go:4:11: fatal error: rocksdb/c.h: No such fil
  // #include "rocksdb/c.h"
            ^~~~~~~~~~~~~
 compilation terminated.
+
 [root@local-153 src]# go build -tags=embed
 can't load package: package .: no Go files in /data/backup/go_workspace/src
 ```
 
-解决方法
+
+* 解决方法
 
 ```
 export CGO_CFLAGS="-I/usr/local/rocksdb/include"
@@ -78,6 +82,28 @@ go build -tags=embed
 ```
 
 
+* 报错类型
+
+
+```
+[root@syq-133 src]# go get github.com/tecbot/gorocksdb                                                              
+# runtime/cgo
+/bin/ld: cannot find -lzstd
+collect2: error: ld returned 1 exit status
+```
+
+* 解决办法
+
+```
+export CGO_LDFLAGS="-L/usr/local/rocksdb -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy -llz4"
+
+新版本取消了lzstd ？
+```
+
+
+
+
+
 ## references
 
 [https://www.cnblogs.com/freeweb/p/10697246.html](https://www.cnblogs.com/freeweb/p/10697246.html)
@@ -85,4 +111,4 @@ go build -tags=embed
 [https://github.com/facebook/rocksdb/wiki/RocksDB-Compatibility-Between-Different-Releases](https://github.com/facebook/rocksdb/wiki/RocksDB-Compatibility-Between-Different-Releases)
 
 
-[https://blog.csdn.net/TaroYoVen/article/details/88813386]()
+[https://blog.csdn.net/TaroYoVen/article/details/88813386](https://blog.csdn.net/TaroYoVen/article/details/88813386)
