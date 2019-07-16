@@ -15,7 +15,7 @@ ss：连接查看工具
 其他：dstat  slurm  nload  bmon nc
 sar -n DEV 1 4
 sar -n tcp,etcp 1
-load -u K
+nload -u K
 
 监控总体带宽使用――nload、bmon、slurm、bwm-ng、cbm、speedometer和netload
 监控总体带宽使用（批量式输出）――vnstat、ifstat、dstat和collectl
@@ -68,6 +68,8 @@ yum install -y hdpam
     
 
 * 测试
+
+
 ```
 hdparm -T /dev/sda
 
@@ -81,6 +83,8 @@ hdparm -T /dev/sda
 
 ## fio
 
+* 源码安装：
+
 ```shell
 wget http://brick.kernel.dk/snaps/fio-2.1.10.tar.gz
 tar zxf fio-2.1.10.tar.gz 
@@ -88,6 +92,14 @@ cd fio-2.1.10
 make -j 12
 make install
 ```
+
+* yum安装
+
+
+```
+yum install fio -y
+```
+
 
 *   参数说明
 
@@ -187,4 +199,15 @@ yum install lshw -y
 ```
 ## mpstat
 
-## 
+## dstat
+
+```
+yum install -y dstat
+```
+
+## nload
+
+```
+yum install -y nload
+nload -u M
+```
