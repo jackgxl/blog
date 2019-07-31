@@ -175,8 +175,21 @@ Application Options:
 
 * mydumper
 
+备份test库test表
 ```
 mydumper -t 12 -h 192.168.11.111 -u 'test' -p 'test' -P 3309 -B dbname -o /backup/db
+```
+
+备份app库，排除log表
+
+```
+mydumper --user=$user -a -S /mysql.sock -B app -x '^(?!(app.log))' -o /home/ --compress --verbose=3 --logfile=m.log 
+```
+
+备份多个数据库
+
+```
+--regex="db1.*|db2.*"
 ```
 
 * 备份文件
@@ -198,6 +211,9 @@ mydumper -t 12 -h 192.168.11.111 -u 'test' -p 'test' -P 3309 -B dbname -o /backu
 myloader -h 192.168.11.100 -u test -p '123456' -P 3308 -d /backup/db -t 12 -B dbname
 ```
 
+```
+myloader --socket=//mysql.sock --user=$user --password=$password  -t 12 -B app -d /data/backup -v 3
+```
 
 ## reference
 
