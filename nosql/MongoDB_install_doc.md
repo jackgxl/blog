@@ -258,8 +258,10 @@ esac
      
 * 进入27019 端口开启副本集
     
-    ```
-    rs.initiate()
+    ```shell
+    conf = { _id : "rep1", members : [     {_id :0 ,host : "192.168.64.112:27019"},    {_id :1,host:"192.168.64.113:27019"},{_id :2,host:"192.168.64.101:27019"},]}
+    
+    rs.initiate(conf)
     ```
      
 * 加入新的端口(27020,27018)
@@ -276,7 +278,7 @@ esac
 * 创建keyFile
 
 
-## mongo_conf 配置
+## mongo_config 配置
 
 ```
 
