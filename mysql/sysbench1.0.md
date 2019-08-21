@@ -79,5 +79,9 @@ sysbench /root/sysbench-1.0.4/src/lua/oltp_write_only.lua  --db-driver=mysql --m
 SQL statistics:    queries performed:        read:                            4128628        write:                           1179608        other:                           589804        total:                           5898040    transactions:                        294902 (982.88 per sec.)    queries:                             5898040 (19657.55 per sec.)    ignored errors:                      0      (0.00 per sec.)    reconnects:                          0      (0.00 per sec.)General statistics:    total time:                          300.0347s    total number of events:              294902
 ```
 
+```
+–db-ps-mode=STRING
+SQL是否需要预编译，模式有：auto/disable，默认为disable。
+```
 
 
