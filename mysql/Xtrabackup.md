@@ -48,7 +48,9 @@ innobackupex --defaults-file=/data/mysql3307/etc/my.cnf --move-back /data/backup
 * 单库备份
 
 ```
-
+innobackupex --defaults-file=/etc/my.cnf --no-timestamp --user='root' --password='123456' --use-memory=1G --databases="db1 db2"  /data/backup/16/ 
+ 
+innobackupex --apply-log /data/backup/16/
 ```
 
 * 单库恢复
