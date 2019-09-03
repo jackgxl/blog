@@ -40,6 +40,22 @@ OK
 
 **slot 迁移**
 
+操作步骤
+
+```shell
+1、目标实例
+cluster setslot {slot} importing {source_node_id} //让目标实例准备导入槽的数据
+2、源实例
+cluster setslot {slot} migrating {target_node_id} //让源实例准备迁出槽的数据
+3、源实例
+cluster getkeysinslot {slot} {count} // 获取要迁移槽的key
+4、源实例
+migrate {target_node_ip} {target_node_port} key 0 {timeout} auth {pass} keys ... //MIGRATE 192.168.64.182 6003 "" 0 5000 auth {password} keys 3461 6313
+5、通知集群中所有主节点，槽分配给目标实例
+cluster setslot {slot} node {target_node_id}
+
+```
+
 cluster nodes
 
 ```
@@ -146,15 +162,18 @@ d8510f2ffccf98c1a3c7e332ae7457c023a37ac5 192.168.64.185:8001@18001 master - 0 15
 
 确认源节点槽10001导出状态开启
 
+```
+
+```
+
 迁移槽10001keys到目的节点
 
 ```
 192.168.64.182:6003> mget 3461 6313
 1) "3461"
 2) "6313"
-192.168.64.182:6003> MIGRATE 192.168.64.185 8001 keys 3461 6313
--> Redirected to slot [2915] located at 192.168.64.183:7003
-NOKEY
+192.168.64.182:6003> MIGRATE 192.168.64.185 8001 "" 0 5000 auth password keys 3461 6313
+
 192.168.64.183:7003> mget 3461 6313
 -> Redirected to slot [10001] located at 192.168.64.182:6003
 1) "3461"
@@ -173,17 +192,39 @@ NOKEY
 ```
 
 
+**取消槽迁移**
+
+```
+ CLUSTER SETSLOT {slot} stable
+```
+
 
 
 * 键
 
-```
+获取slot中的key
 
+```
+192.168.64.182:6003> CLUSTER GETKEYSINSLOT 10001 1000
+1) "3461"
+2) "6313"
 ```
 
 ## reference
 
+
 [https://redis.io/topics/cluster-tutorial](https://redis.io/topics/cluster-tutorial)
 
+[https://redis.io/commands/migrate](https://redis.io/commands/migrate)
+
+[https://www.cnblogs.com/kevingrace/p/7910692.html](https://www.cnblogs.com/kevingrace/p/7910692.html)
+
 [https://www.cnblogs.com/ivictor/p/9762394.html](https://www.cnblogs.com/ivictor/p/9762394.html)
+
+[https://www.jianshu.com/p/15ec6e870f2d](https://www.jianshu.com/p/15ec6e870f2d)
+
+[https://www.cnblogs.com/Cherry-Linux/p/8046276.html](https://www.cnblogs.com/Cherry-Linux/p/8046276.html)
+
+
+
 
