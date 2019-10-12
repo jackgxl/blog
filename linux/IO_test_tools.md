@@ -201,13 +201,14 @@ yum install lshw -y
 
 ## dstat
 
-```
+```shell
 yum install -y dstat
 ```
 
 ## nload
 
-```
+```shell
 yum install -y nload
 nload -u M
 ```
+
