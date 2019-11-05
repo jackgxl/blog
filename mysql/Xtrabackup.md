@@ -71,6 +71,29 @@ innobackupex --apply-log /data/backup/16/
 
 ```
 
+
+* 压缩备份
+
+```
+innobackupex --stream=xbstream /root/backup/ > /root/backup/backup.xbstream
+
+innobackupex --stream=xbstream --compress /root/backup/ > /root/backup/backup.xbstream
+
+xbstream -x <  backup.xbstream -C /root/backup/
+
+innobackupex --stream=tar /root/backup/ > /root/backup/out.tar
+
+innobackupex --stream=tar ./ | ssh user@destination \ "cat - > /data/backups/backup.tar"
+用tar压缩备份，在解压时必须使用 -i 参数:
+tar -xizf backup.tar.gz
+
+innobackupex --stream=tar ./ | gzip - > backup.tar.gz
+innobackupex --stream=tar ./ | bzip2 - > backup.tar.bz2
+
+在恢复之前需要prepared该备份，因为流式备份不会做prepare。
+```
+
+
 ### 本地备份传送到远程存储
 
 * 备份到远程
@@ -109,3 +132,9 @@ Tips:
 >   * defaults-file,user,password,socket 根据自己的实际配置修改
 >   * 如果有MyISAM大表,不要在主库操作,低峰备份。
 >   * use-memory=1G时 15k转 RAID10 备份时磁盘使用率80%
+> 
+> 
+
+# reference
+
+[https://blog.csdn.net/n88lpo/article/details/79226616](https://blog.csdn.net/n88lpo/article/details/79226616)
