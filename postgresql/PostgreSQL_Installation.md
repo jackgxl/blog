@@ -57,7 +57,6 @@ vm.swappiness=0
 vm.overcommit_memory = 0  
 vm.overcommit_ratio = 90  
 
-
 生效
 
 sysctl -p  
@@ -121,6 +120,11 @@ su - postgres
 
 ```
 
+## 启动
+
+```shell
+/usr/lcoal/postgres/bin/pg_ctl -D /data/pg start 
+```
 
 
 

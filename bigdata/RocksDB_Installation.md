@@ -100,7 +100,10 @@ export CGO_LDFLAGS="-L/usr/local/rocksdb -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnap
 新版本取消了lzstd ？
 ```
 
-
+环境变量问题
+```
+CGO_CFLAGS="-I/opt/rocksdb/include" CGO_LDFLAGS="-L/opt/rocksdb -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy" go install
+```
 
 
 
