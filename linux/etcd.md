@@ -61,7 +61,36 @@ etcd --name 'etcd02' --data-dir=/data/etcd/data.etcd --wal-dir '/data/etcd/wal' 
 ## 检查集群
 
 ```
-
+[root@localhost etcd]# etcdctl --endpoints="http://192.168.64.101:2379,http://192.168.64.183:2379,http://192.168.64.185:2379"  endpoint status  --write-out="table"
++----------------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
+|          ENDPOINT          |        ID        | VERSION | DB SIZE | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS |
++----------------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
+| http://192.168.64.101:2379 | f2de9d180d47650c |   3.4.3 |   22 MB |     false |      false |        19 |       9013 |               9013 |        |
+| http://192.168.64.183:2379 | e6ce75bd2bb1fbe9 |   3.4.3 |   22 MB |      true |      false |        19 |       9013 |               9013 |        |
+| http://192.168.64.185:2379 | 35bc7cc16b544d95 |   3.4.3 |   22 MB |     false |      false |        19 |       9013 |               9013 |        |
++----------------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
+[root@localhost etcd]# ETCDCTL_API=3  etcdctl --endpoints="http://192.168.64.101:2379,http://192.168.64.183:2379,http://192.168.64.185:2379"  put test abcde
+OK
+[root@localhost etcd]# ETCDCTL_API=3  etcdctl --endpoints="http://192.168.64.101:2379,http://192.168.64.183:2379,http://192.168.64.185:2379"  get test    
+test
+abcde
+[root@localhost etcd]# ETCDCTL_API=3  etcdctl --endpoints="http://192.168.64.101:2379,http://192.168.64.183:2379,http://192.168.64.185:2379"  del test    
+1
 ```
 
+查询所有key
 
+```shell
+[root@localhost etcd]# ETCDCTL_API=3  etcdctl --endpoints="http://192.168.64.101:2379,http://192.168.64.183:2379,http://192.168.64.185:2379"  get --from-key ""
+foo
+hello
+[root@localhost etcd]# ETCDCTL_API=3  etcdctl --endpoints="http://192.168.64.101:2379,http://192.168.64.183:2379,http://192.168.64.185:2379"  get foo
+foo
+hello
+```
+
+### reference
+
+[https://www.cnblogs.com/li-peng/p/9259793.html](https://www.cnblogs.com/li-peng/p/9259793.html)
+
+[https://blog.51cto.com/hequan/2327820](https://blog.51cto.com/hequan/2327820)
