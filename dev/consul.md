@@ -19,6 +19,7 @@ mv consul_1.6.2_linux_amd64/consul /usr/local/bin
 
 参数意义：
 
+```
 >consul -h
 >Usage: consul [--version] [--help] <command> [<args>]
 >
@@ -54,7 +55,7 @@ mv consul_1.6.2_linux_amd64/consul /usr/local/bin
 >    validate       Validate config files/directories
 >    version        Prints the Consul version
 >    watch          Watch for changes in Consul
-
+```
 
 ### config
 
