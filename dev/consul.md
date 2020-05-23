@@ -55,6 +55,24 @@ mv consul_1.6.2_linux_amd64/consul /usr/local/bin
 >    version        Prints the Consul version
 >    watch          Watch for changes in Consul
 
+
+### config
+
+```
+{
+    "data_dir": "/data/consul",
+    "datacenter": "dc1",
+    "log_level": "INFO",
+    "server": true,
+    "bootstrap_expect": 3,
+    "bind_addr": "192.168.64.182",
+    "client_addr": "0.0.0.0",
+    "ui":true
+    "log-file": "/data/consul/consul.log"
+    "log-rotate-bytes": 102400 
+}
+```
+
 ### 	*server*
 
 ```shell
@@ -66,6 +84,17 @@ consul agent -server -bootstrap-expect=2 -data-dir=/data/consul/data/ -node=cons
 ```shell
 consul agent --server=false --client=0.0.0.0 --join 192.168.22.185 -pid-file=/data/consul/data/consul.pid -data-dir=/data/consul/data/
 ```
+
+
+
+### 查看集群状态
+
+```
+consul operator raft list-peers
+```
+
+
+
 
 #### tips:
 
