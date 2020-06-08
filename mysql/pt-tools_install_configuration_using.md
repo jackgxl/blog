@@ -34,6 +34,32 @@ pt-table-checksum --version
 
 ### pt-table-checksum
 
+参数须知
+
+```
+--replicate-check：执行完 checksum 查询在percona.checksums表中，不一定马上查看结果呀 —— yes则马上比较chunk的crc32值并输出DIFFS列，否则不输出。默认yes，如果指定为--noreplicate-check，一般后续使用下面的--replicate-check-only去输出DIFF结果。
+
+--replicate-check-only：不在主从库做 checksum 查询，只在原有 percona.checksums 表中查询结果，并输出数据不一致的信息。周期性的检测一致性时可能用到。
+
+--nocheck-binlog-format：不检测日志格式。这个选项对于 ROW 模式的复制很重要，因为pt-table-checksum会在 Master和Slave 上设置binlog_format=STATEMENT（确保从库也会执行 checksum SQL），MySQL限制从库是无法设置的，所以假如行复制从库，再作为主库复制出新从库时（A->B->C），B的checksums数据将无法传输。（没验证）
+
+--replicate= 指定 checksum 计算结果存到哪个库表里，如果没有指定，默认是 percona.checksums 。
+
+#-h -u -p -P -S -d 连接信息
+
+--nocheck-replication-filters 检测中忽略mysql 配置参数binlog_ignore_db等。
+--nocheck-binlog-format 不检测日志格式
+--replicate 指定checksum 存储的db和表， 如test.checksum
+ --chunk-size， --chunk-size-limit 用于指定检测块的大小。 可控性更强
+ --ignore-databases/tables/column 跳出指定元素的过滤
+--lock-wait-timeout innodb 锁的超时设定， 默认为1
+--max-load 设置最大并发连接数
+--replicate-check-only 只输出数据不一致的信息。
+--help 有这个就行了， 以及其他的详见文档。
+
+```
+
+
 #### 主库操作 所有从库全部更新（适合一主一从）
 
 ```
@@ -116,3 +142,8 @@ pt-table-sync --replicate=gao.checksums --charset=utf8 h=192.168.1.152,u=pt_user
 
 ```   
     
+## reference
+
+[https://blog.csdn.net/melody_mr/article/details/45224249](https://blog.csdn.net/melody_mr/article/details/45224249)
+
+[https://www.cnblogs.com/erisen/p/5971420.html](https://www.cnblogs.com/erisen/p/5971420.html)
