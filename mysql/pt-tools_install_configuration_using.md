@@ -142,6 +142,22 @@ pt-table-sync --replicate=gao.checksums --charset=utf8 h=192.168.1.152,u=pt_user
 
 ```   
     
+## tips
+
+pt-table-check pt-table-sync 从3.0.5版本开始支持 mysql channel 模式复制，示例如下：
+
+```
+pt-table-checksum  --nocheck-replication-filters --no-check-binlog-format --channel=artron_60 --replicate=test_ajl.checksums  --host=192.168.1.6 --user=gao --password='$passwd' --port=3306 --set-vars innodb_lock_wait_timeout=5 --databases=${i}  --recursion-method dsn=h=192.168.1.2,u=gao,p=123456,P=3306,D=test,t=dsns
+```
+
+
+```
+pt-table-sync --channel=channel_name --replicate=test_ajl.checksums  --sync-to-master --charset=utf8   --database=db_name  h=192.168.1.2,u=gao,p=123456,P=3306   --print 
+先查看，再执行
+--execute 
+```
+
+
 ## reference
 
 [https://blog.csdn.net/melody_mr/article/details/45224249](https://blog.csdn.net/melody_mr/article/details/45224249)
