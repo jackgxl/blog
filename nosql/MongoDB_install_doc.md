@@ -16,7 +16,16 @@
     内核调整：
     echo never > /sys/kernel/mm/transparent_hugepage/enabled
     echo never > /sys/kernel/mm/transparent_hugepage/defrag
+    ```
+    ```
     用户创建：
+        useradd -M -s /sbin/nologin mongo
+    用户限制：
+        mongo soft nofile 640000
+        mongo hard nofile 640000
+        mongo soft nproc 320000
+        mongo hard nproc 320000
+    
     ```
 
 ## MongoDB 下载
@@ -25,7 +34,13 @@
 wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel70-4.0.5.tgz
 ```
 
+## 安装目录
 
+```
+mkdir -pv /data/mongo27019/{etc,var,log,tmp}
+openssl rand -base64 741 > /data/mongo27019/var/keyFile
+chmod 400 /data/mongo27019/var/keyFile
+```
 
 ## mongod配置启动 
 
