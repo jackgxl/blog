@@ -16,7 +16,16 @@
     内核调整：
     echo never > /sys/kernel/mm/transparent_hugepage/enabled
     echo never > /sys/kernel/mm/transparent_hugepage/defrag
+    ```
+    ```
     用户创建：
+        useradd -M -s /sbin/nologin mongo
+    用户限制：
+        mongo soft nofile 640000
+        mongo hard nofile 640000
+        mongo soft nproc 320000
+        mongo hard nproc 320000
+    
     ```
 
 ## MongoDB 下载
