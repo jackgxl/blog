@@ -34,7 +34,13 @@
 wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel70-4.0.5.tgz
 ```
 
+## 安装目录
 
+```
+mkdir -pv /data/mongo27019/{etc,var,log,tmp}
+openssl rand -base64 741 > /data/mongo27019/var/keyFile
+chmod 400 /data/mongo27019/var/keyFile
+```
 
 ## mongod配置启动 
 
