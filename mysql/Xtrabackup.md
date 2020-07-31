@@ -132,7 +132,7 @@ Tips:
 >   * defaults-file,user,password,socket 根据自己的实际配置修改
 >   * 如果有MyISAM大表,不要在主库操作,低峰备份。
 >   * use-memory=1G时 15k转 RAID10 备份时磁盘使用率80%
-> 
+> * 注意版本8.0不能恢复基于5.7的2.4 版本的备份
 > 
 
 # reference
