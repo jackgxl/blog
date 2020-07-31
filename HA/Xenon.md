@@ -158,6 +158,17 @@ echo '/data/xenon/xenon.json'>/data/xenon/bin/config.path
 nohup /data/xenon/bin/xenon -c /data/xenon/xenon.json > /data/xenon/xenon.log 2>&1 &   
 ```
 
+```shell
+[mysql@svr157 data]$ tree xenon/
+xenon/
+├── bin
+│   ├── config.path
+│   ├── xenon
+│   └── xenoncli
+├── xenon.json
+└── xenon.log
+```
+
 
 
 所有节点 添加raft 信息,以109节点为例：
@@ -434,6 +445,14 @@ b92fe558-c7e2-11ea-8bd1-e0db551f93b4:1-3196 0    }
 +---------------------+---------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
 (3 rows)
 ```
+
+
+
+添加新实例157
+
+添加xenon
+
+rebuild mysql 实例
 
 
 
