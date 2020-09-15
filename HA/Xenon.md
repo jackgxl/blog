@@ -23,7 +23,7 @@ ll bin/
 ```shell
 // 5.7 用xtrabackup2.4 版本
 wget https://www.percona.com/downloads/Percona-XtraBackup-LATEST/Percona-XtraBackup-8.0.13/binary/redhat/7/x86_64/percona-xtrabackup-80-8.0.13-1.el7.x86_64.rpm
-yum -y install percona-xtrabackup-80-8.0.13-1.el7.x86_64.rpm 
+yum -y install percona-xtrabackup-80-8.0.13-1.el7.x86_64.rpm sshpass
 ```
 
 
@@ -477,7 +477,8 @@ b92fe558-c7e2-11ea-8bd1-e0db551f93b4:1-3196 0    }
 +---------------------+-------------------------------+---------+---------+--------------------------+--------------------+----------------+----------+
 |         ID          |             Raft              | Mysqld  | Monitor |          Backup          |       Mysql        | IO/SQL_RUNNING | MyLeader |
 +---------------------+-------------------------------+---------+---------+--------------------------+--------------------+----------------+----------+
-| 192.168.64.157:8801 | [ViewID:0 EpochID:0]@FOLLOWER | RUNNING | ON      | state:[NONE]␤            | [ALIVE] [READONLY] | [true/true]    |          |
+| 192.168.64.157:8801 | [ViewID:0 EpochID:0]@FOLLOWER | RUNNING | ON      | state:[NONE]
+            | [ALIVE] [READONLY] | [true/true]    |          |
 |                     |                               |         |         | LastError:               |                    |                |          |
 +---------------------+-------------------------------+---------+---------+--------------------------+--------------------+----------------+----------+
 (1 rows)
@@ -489,10 +490,12 @@ b92fe558-c7e2-11ea-8bd1-e0db551f93b4:1-3196 0    }
 +---------------------+-------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
 |         ID          |             Raft              | Mysqld  | Monitor |          Backup          |        Mysql        | IO/SQL_RUNNING |      MyLeader       |
 +---------------------+-------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
-| 192.168.64.157:8801 | [ViewID:0 EpochID:1]@FOLLOWER | RUNNING | ON      | state:[NONE]␤            | [ALIVE] [READONLY]  | [true/true]    |                     |
+| 192.168.64.157:8801 | [ViewID:0 EpochID:1]@FOLLOWER | RUNNING | ON      | state:[NONE]
+            | [ALIVE] [READONLY]  | [true/true]    |                     |
 |                     |                               |         |         | LastError:               |                     |                |                     |
 +---------------------+-------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
-| 192.168.64.154:8801 | [ViewID:248 EpochID:9]@LEADER | RUNNING | ON      | state:[NONE]␤            | [ALIVE] [READWRITE] | [true/true]    | 192.168.64.154:8801 |
+| 192.168.64.154:8801 | [ViewID:248 EpochID:9]@LEADER | RUNNING | ON      | state:[NONE]
+            | [ALIVE] [READWRITE] | [true/true]    | 192.168.64.154:8801 |
 |                     |                               |         |         | LastError:               |                     |                |                     |
 +---------------------+-------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
 (2 rows)
@@ -519,16 +522,20 @@ raft 主节点 添加 raft idle节点
 +---------------------+----------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
 |         ID          |               Raft               | Mysqld  | Monitor |          Backup          |        Mysql        | IO/SQL_RUNNING |      MyLeader       |
 +---------------------+----------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
-| 192.168.64.109:8801 | [ViewID:248 EpochID:10]@FOLLOWER | RUNNING | ON      | state:[NONE]␤            | [ALIVE] [READONLY]  | [true/true]    | 192.168.64.154:8801 |
+| 192.168.64.109:8801 | [ViewID:248 EpochID:10]@FOLLOWER | RUNNING | ON      | state:[NONE]
+            | [ALIVE] [READONLY]  | [true/true]    | 192.168.64.154:8801 |
 |                     |                                  |         |         | LastError:               |                     |                |                     |
 +---------------------+----------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
-| 192.168.64.155:8801 | [ViewID:248 EpochID:10]@FOLLOWER | RUNNING | ON      | state:[NONE]␤            | [ALIVE] [READONLY]  | [true/true]    | 192.168.64.154:8801 |
+| 192.168.64.155:8801 | [ViewID:248 EpochID:10]@FOLLOWER | RUNNING | ON      | state:[NONE]
+            | [ALIVE] [READONLY]  | [true/true]    | 192.168.64.154:8801 |
 |                     |                                  |         |         | LastError:               |                     |                |                     |
 +---------------------+----------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
-| 192.168.64.101:8801 | [ViewID:248 EpochID:10]@FOLLOWER | RUNNING | ON      | state:[NONE]␤            | [ALIVE] [READONLY]  | [true/true]    | 192.168.64.154:8801 |
+| 192.168.64.101:8801 | [ViewID:248 EpochID:10]@FOLLOWER | RUNNING | ON      | state:[NONE]
+            | [ALIVE] [READONLY]  | [true/true]    | 192.168.64.154:8801 |
 |                     |                                  |         |         | LastError:               |                     |                |                     |
 +---------------------+----------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
-| 192.168.64.154:8801 | [ViewID:248 EpochID:10]@LEADER   | RUNNING | ON      | state:[NONE]␤            | [ALIVE] [READWRITE] | [true/true]    | 192.168.64.154:8801 |
+| 192.168.64.154:8801 | [ViewID:248 EpochID:10]@LEADER   | RUNNING | ON      | state:[NONE]
+            | [ALIVE] [READWRITE] | [true/true]    | 192.168.64.154:8801 |
 |                     |                                  |         |         | LastError:               |                     |                |                     |
 +---------------------+----------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
 | 192.168.54.157:8801 | UNKNOW                           | UNKNOW  | UNKNOW  | UNKNOW                   | UNKNOW              | UNKNOW         | UNKNOW              |
@@ -615,16 +622,20 @@ b92fe558-c7e2-11ea-8bd1-e0db551f93b4:1-3196
 +---------------------+----------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
 |         ID          |               Raft               | Mysqld  | Monitor |          Backup          |        Mysql        | IO/SQL_RUNNING |      MyLeader       |
 +---------------------+----------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
-| 192.168.64.109:8801 | [ViewID:248 EpochID:11]@FOLLOWER | RUNNING | ON      | state:[NONE]␤            | [ALIVE] [READONLY]  | [true/true]    | 192.168.64.154:8801 |
+| 192.168.64.109:8801 | [ViewID:248 EpochID:11]@FOLLOWER | RUNNING | ON      | state:[NONE]
+            | [ALIVE] [READONLY]  | [true/true]    | 192.168.64.154:8801 |
 |                     |                                  |         |         | LastError:               |                     |                |                     |
 +---------------------+----------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
-| 192.168.64.155:8801 | [ViewID:248 EpochID:11]@FOLLOWER | RUNNING | ON      | state:[NONE]␤            | [ALIVE] [READONLY]  | [true/true]    | 192.168.64.154:8801 |
+| 192.168.64.155:8801 | [ViewID:248 EpochID:11]@FOLLOWER | RUNNING | ON      | state:[NONE]
+            | [ALIVE] [READONLY]  | [true/true]    | 192.168.64.154:8801 |
 |                     |                                  |         |         | LastError:               |                     |                |                     |
 +---------------------+----------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
-| 192.168.64.101:8801 | [ViewID:248 EpochID:11]@FOLLOWER | RUNNING | ON      | state:[NONE]␤            | [ALIVE] [READONLY]  | [true/true]    | 192.168.64.154:8801 |
+| 192.168.64.101:8801 | [ViewID:248 EpochID:11]@FOLLOWER | RUNNING | ON      | state:[NONE]
+            | [ALIVE] [READONLY]  | [true/true]    | 192.168.64.154:8801 |
 |                     |                                  |         |         | LastError:               |                     |                |                     |
 +---------------------+----------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
-| 192.168.64.154:8801 | [ViewID:248 EpochID:11]@LEADER   | RUNNING | ON      | state:[NONE]␤            | [ALIVE] [READWRITE] | [true/true]    | 192.168.64.154:8801 |
+| 192.168.64.154:8801 | [ViewID:248 EpochID:11]@LEADER   | RUNNING | ON      | state:[NONE]
+            | [ALIVE] [READWRITE] | [true/true]    | 192.168.64.154:8801 |
 |                     |                                  |         |         | LastError:               |                     |                |                     |
 +---------------------+----------------------------------+---------+---------+--------------------------+---------------------+----------------+---------------------+
 (4 rows)
@@ -695,6 +706,74 @@ b92fe558-c7e2-11ea-8bd1-e0db551f93b4:1-3196
 
 
 
+### xenoncli mysql cancelbackup
+
+```shell
+[mysql@local-155 xenon]$ ./bin/xenoncli mysql cancelbackup
+ 2020/09/15 15:08:32.072008       [WARNING]     backup.cancel.begin....
+ 2020/09/15 15:08:32.073318       [PANIC]        rsp[os: process already finished] != [OK]
+panic:    [PANIC]        rsp[os: process already finished] != [OK]
+
+goroutine 1 [running]:
+xbase/xlog.(*Log).Panic(0xc0001b8080, 0x8d9f53, 0xf, 0xc000127da8, 0x1, 0x1)
+        /root/go/src/xenon/src/xbase/xlog/xlog.go:142 +0x153
+cli/cmd.RspOK(...)
+        /root/go/src/xenon/src/cli/cmd/common.go:41
+cli/cmd.mysqlCancelBackupCommandFn(0xc0001bc240, 0xcae328, 0x0, 0x0)
+        /root/go/src/xenon/src/cli/cmd/mysql.go:460 +0x164
+vendor/github.com/spf13/cobra.(*Command).execute(0xc0001bc240, 0xcae328, 0x0, 0x0, 0xc0001bc240, 0xcae328)
+        /root/go/src/xenon/src/vendor/github.com/spf13/cobra/command.go:603 +0x22e
+vendor/github.com/spf13/cobra.(*Command).ExecuteC(0xc7a800, 0x1, 0xc000127f78, 0x40722f)
+        /root/go/src/xenon/src/vendor/github.com/spf13/cobra/command.go:689 +0x2bc
+vendor/github.com/spf13/cobra.(*Command).Execute(...)
+        /root/go/src/xenon/src/vendor/github.com/spf13/cobra/command.go:648
+main.main()
+        /root/go/src/xenon/src/cli/cli.go:43 +0x31
+```
+
+#### error log
+
+```shell
+2020/09/15 15:38:05.110508       [ERROR]       sshpass.not.installed.check.outs[exit status 127:bash -c sshpass -Vbash: sshpass: command not found
+]
+ 2020/09/15 15:38:05.110546       [ERROR]       backup.ssh.tunnel[password].error
+ 2020/09/15 15:38:08.082812       [ERROR]       backup.cmd.scan.error[cmd.outs.[completed OK!].found[0]!=expects[1]
+xbase/common.(*LinuxCommand).Scan
+        /root/go/src/xenon/src/xbase/common/linux.go:141
+mysqld.(*Backup).Backup
+        /root/go/src/xenon/src/mysqld/backup.go:184
+mysqld.(*BackupRPC).DoBackup
+        /root/go/src/xenon/src/mysqld/rpc_backup.go:28
+reflect.Value.call
+        /usr/local/go/src/reflect/value.go:460
+reflect.Value.Call
+        /usr/local/go/src/reflect/value.go:321
+net/rpc.(*service).call
+        /usr/local/go/src/net/rpc/server.go:377
+runtime.goexit
+        /usr/local/go/src/runtime/asm_amd64.s:1373
+```
+
+
+
+安装依赖
+
+```shell
+
+[root@local-155 gaoxueliang]# yum install sshpass -y
+Loaded plugins: fastestmirror
+```
+
+
+
+执行命令
+
+
+
+
+
+
+
 
 
 ## Reference
@@ -703,5 +782,7 @@ b92fe558-c7e2-11ea-8bd1-e0db551f93b4:1-3196
 
 [https://blog.51cto.com/wujianwei/2458340](https://blog.51cto.com/wujianwei/2458340)
 
-[[https://www.fallbook.cn/2018/10/29/QingCloud-Mysql-Plus-Xenon-%E9%83%A8%E7%BD%B2/](https://www.fallbook.cn/2018/10/29/QingCloud-Mysql-Plus-Xenon-部署/)]([https://www.fallbook.cn/2018/10/29/QingCloud-Mysql-Plus-Xenon-%E9%83%A8%E7%BD%B2/](https://www.fallbook.cn/2018/10/29/QingCloud-Mysql-Plus-Xenon-部署/))
+[[https://www.fallbook.cn/2018/10/29/QingCloud-Mysql-Plus-Xenon-%E9%83%A8%E7%BD%B2/]
+
+[(https://www.fallbook.cn/2018/10/29/QingCloud-Mysql-Plus-Xenon-部署/)]([https://www.fallbook.cn/2018/10/29/QingCloud-Mysql-Plus-Xenon-%E9%83%A8%E7%BD%B2/](https://www.fallbook.cn/2018/10/29/QingCloud-Mysql-Plus-Xenon-部署/))
 
