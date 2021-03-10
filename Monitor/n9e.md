@@ -1,18 +1,30 @@
-# n9e
-
+# n9e 
+**v3**
 
 
 ## 环境准备
 
+**mysql安装**
 
+**redis安装**
 
 ## 编译安装
 
+```
+参考github
+```
 
 
 ## 配置修改
 
+下载n9e
 
+```
+修改etc下 关于mysql 和redis 的配置
+mysql.yml
+judge.yml
+monapi.yml
+```
 
 ## 部署监控
 

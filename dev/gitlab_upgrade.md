@@ -72,8 +72,8 @@ gitlab-ctl reconfigure
 
 ### 安装依赖
 
-```
-yum install curl openssh-server openssh-clients postfix cronie policycoreutils-python –y
+```shell
+yum install wget curl openssh-server openssh-clients postfix cronie policycoreutils-python patch –y
 
 rpm -i gitlab-ce-10.0.2-ce.0.el7.x86_64.rpm
 
@@ -81,6 +81,39 @@ vim /etc/gitlab/gitlab.rb
 gitlab-ctl reconfigure
 gitlab-ctl restart
 ```
+
+
+
+新版本下载（清华源更好用）
+
+repo模式
+
+```shell
+
+vim /etc/yum.repo.d/gitlab-ce.repo
+
+[gitlab-ce]
+name=gitlab-ce
+baseurl=http://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7
+repo_gpgcheck=0
+gpgcheck=0
+enabled=1
+gpgkey=https://packages.gitlab.com/gpg.key
+
+yum install gitlab-ce -y
+
+gitlab-ctl reconfigure
+gitlab-ctl status
+gitlab-ctl start
+```
+
+rpm模式
+
+```shell
+wget https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/gitlab-ce-13.9.1-ce.0.el7.x86_64.rpm
+```
+
+
 
 查看当前gitlab-ce版本号
 
@@ -183,6 +216,23 @@ gitlab-ctl restart
 
 ### 汉化相关
 
+生成汉化补丁
+
+```shell
+git clone https://gitlab.com/xhang/gitlab.git
+git branch -a
+
+git diff ${version} ${version}-zh >123.diff
+
+gitlab-ctl stop
+patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 <123.diff 
+gitlab-ctl start
+```
+
+
+
+
+
 停止服务
 
 ```
@@ -239,6 +289,19 @@ wget --content-disposition https://packages.gitlab.com/gitlab/gitlab-ce/packages
 
 
 
+密码修改
+
+```
+gitlab-rails console -e production //进入gitlab 终端
+user = User.where(id: 1).first  // 选择用户
+user.password = 'secret_pass'  //修改密码
+user.password_confirmation = 'secret_pass' //确认密码
+user.save!	//保存密码
+exit  //退出
+```
+
+
+
 #### reference
 
 [https://www.bbsmax.com/A/Gkz1mQ1gzR/](https://www.bbsmax.com/A/Gkz1mQ1gzR/)
@@ -254,3 +317,7 @@ https://www.cnblogs.com/nethrd/p/9408290.html
 https://blog.51cto.com/12390045/2117819
 
 https://www.bbsmax.com/A/xl567gQYdr/
+
+[https://www.jianshu.com/p/977bc03daffb](https://www.jianshu.com/p/977bc03daffb)
+
+[https://blog.csdn.net/A___LEi/article/details/110476531](https://blog.csdn.net/A___LEi/article/details/110476531)
