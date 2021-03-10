@@ -230,7 +230,7 @@ clone=FORCE_PLUS_PERMANENT
 
 ## 本地 clone
 
-* clone 需要游clone_admin权限的用户才能clone，本地实验使用root
+* clone 需要由clone_admin权限的用户才能clone，本地实验使用root
 
 ```
 GRANT BACKUP_ADMIN ON *.* TO 'clone_user';
@@ -255,7 +255,7 @@ Query OK, 0 rows affected (5 min 13.88 sec)
 ```
 set global clone_valid_donor_list='192.168.64.154:5432'
 
-clone instance from gao@192.168.64.154:5432 identified by '213456' data directory = '/data/backup/clone/mysql8';
+clone instance from gao@192.168.64.154:5432 identified by 'xxxxxxxx' data directory = '/data/backup/clone/mysql8';
 ```
 
 ## 验证
