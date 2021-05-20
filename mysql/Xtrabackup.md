@@ -7,6 +7,10 @@
 ## 安装环境
 
 ```shell
+安装yum源
+yum install https://repo.percona.com/yum/percona-release-latest.noarch.rpm
+
+
 [root@localhost ~]# ls percona-*
 percona-toolkit-3.0.2-1.el7.x86_64.rpm  percona-xtrabackup-24-2.4.7-1.el7.x86_64.rpm
 
