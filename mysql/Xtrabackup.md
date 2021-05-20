@@ -115,9 +115,11 @@ innobackupex --decompress all/
 ```
 
 应用Redolog
+
 innobackupex --apply-log /data/backup/all/
 
 拷贝数据
+
 innobackupex --defaults-file=/data/mysql3307/etc/my.cnf --move-back /data/backup/all/
 
 
