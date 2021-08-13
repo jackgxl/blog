@@ -3,8 +3,7 @@
 ## 依赖关系安装
 
 ```
-yum install zlib zlib-devel bzip2 bzip2-devel lz4-devel libasan snappy snappy-devel -y
-yum install snappy zlib bzip2 lz4 ASAN zstd 
+yum install zlib zlib-devel bzip2 bzip2-devel lz4-devel libasan snappy snappy-devel snappy zlib bzip2 lz4 ASAN zstd gcc-c++ -y 
 ```
 ## 编译安装
 
