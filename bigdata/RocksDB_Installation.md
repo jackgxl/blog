@@ -2,6 +2,12 @@
 
 ## 依赖关系安装
 
+安装epel
+
+```
+rpm -ivh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+```
+
 ```
 yum install -y zlib zlib-devel bzip2 bzip2-devel lz4-devel libasan snappy snappy-devel snappy zlib bzip2 lz4 ASAN zstd gcc-c++  gflags-devel readline-devel ncurses-devel openssl-devel lz4-devel gdb git cmake gcc-c++ bzip2-devel libaio-devel bison zlib-devel snappy-devel
 
