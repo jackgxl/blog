@@ -12,21 +12,95 @@ yum install -y python3 snappy snappy-devel  zlib zlib-devel  bzip2 bzip2-devel  
 
 ```
 yum install -y zlib zlib-devel bzip2 bzip2-devel lz4-devel libasan snappy snappy-devel snappy zlib bzip2 lz4 ASAN zstd gcc-c++  gflags-devel readline-devel ncurses-devel openssl-devel lz4-devel gdb git cmake gcc-c++ bzip2-devel libaio-devel bison zlib-devel snappy-devel
-
 yum install zlib zlib-devel bzip2 bzip2-devel lz4-devel libasan snappy snappy-devel snappy zlib bzip2 lz4 gflags zstd gcc-c++ python3 -y 
-
-
 yum install libzstd-devel -y
 
 ```
 
 epel8
 
-```
+```shell
 sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 sudo rpm -ql epel-release
+yum install -y python3 snappy git snappy-devel  zlib zlib-devel  bzip2 bzip2-devel  lz4-devel  libasan libzstd-devel gcc-c++ 
+rocksdb-6.0.2.tar.gz  
+zstd-1.5.0.tar.gz
+tar zxf zstd-1.5.0.tar.gz
+cd zstd-1.5.0/
+make && sudo make install
+
+git clone https://github.com/gflags/gflags.git
+cd gflags
+git checkout v2.0
+./configure && make && sudo make install
+
+vim /etc/ld.so.conf
+echo "/usr/local/lib" >> /etc/ld.so.conf
+ldconfig
+
+tar zxf rocksdb-6.0.2.tar.gz
+cd rocksdb-6.0.2/
+make static_lib && sudo make install-static
+make shared_lib && sudo make install-shared
 
 ```
+
+test
+
+```c++
+#include <cstdio>
+#include <string>
+
+#include "rocksdb/db.h"
+#include "rocksdb/slice.h"
+#include "rocksdb/options.h"
+
+using namespace std;
+using namespace rocksdb;
+
+const std::string PATH = "/tmp/rocksdb_tmp";
+
+int main(){
+    DB* db;
+    Options options;
+    options.create_if_missing = true;
+    Status status = DB::Open(options, PATH, &db);
+    assert(status.ok());
+    Slice key("foo");
+    Slice value("bar");
+    
+    std::string get_value;
+    status = db->Put(WriteOptions(), key, value);
+    if(status.ok()){
+        status = db->Get(ReadOptions(), key, &get_value);
+        if(status.ok()){
+            printf("get %s success!!\n", get_value.c_str());
+        }else{
+            printf("get failed\n"); 
+        }
+    }else{
+        printf("put failed\n");
+    }
+
+    delete db;
+}
+```
+
+动态编译
+
+```shell
+g++ -std=c++11 -o rocksdbtest test.cpp -lrocksdb  -lpthread
+./rocksdbtest
+```
+
+
+
+静态编译
+
+```shell
+g++ -std=c++11 -o rocksdbtest test.cpp ./librocksdb.a -lpthread -lsnappy  -lz -lbz2 -lzstd /usr/lib/x86_64-linux-gnu/liblz4.a
+```
+
 
 
 ## 编译安装
