@@ -6,6 +6,8 @@
 
 ```
 rpm -ivh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+yum install -y  snappy snappy-devel  zlib zlib-devel  bzip2 bzip2-devel  lz4-devel  libasan libzstd-devel
 ```
 
 ```
