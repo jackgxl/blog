@@ -19,6 +19,16 @@ yum install zlib zlib-devel bzip2 bzip2-devel lz4-devel libasan snappy snappy-de
 yum install libzstd-devel -y
 
 ```
+
+epel8
+
+```
+sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+sudo rpm -ql epel-release
+
+```
+
+
 ## 编译安装
 
 下载安装包
