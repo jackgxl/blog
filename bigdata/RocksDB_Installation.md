@@ -206,9 +206,11 @@ CGO_CFLAGS="-I/opt/rocksdb/include" CGO_LDFLAGS="-L/opt/rocksdb -lrocksdb -lstdc
 
 ## references
 
+[RocksDB安装](https://xonlab.com/2020/11/08/rocksDB安装/)
+
 [https://www.cnblogs.com/freeweb/p/10697246.html](https://www.cnblogs.com/freeweb/p/10697246.html)
 
 [https://github.com/facebook/rocksdb/wiki/RocksDB-Compatibility-Between-Different-Releases](https://github.com/facebook/rocksdb/wiki/RocksDB-Compatibility-Between-Different-Releases)
 
-
 [https://blog.csdn.net/TaroYoVen/article/details/88813386](https://blog.csdn.net/TaroYoVen/article/details/88813386)
+

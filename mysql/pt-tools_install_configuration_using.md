@@ -102,9 +102,9 @@ select db, tbl, sum(this_cnt) as total_rows, count(*) as chunks from checksums w
 
     ```
 
-*  从库创建数据校验信息表，从库路由表dsns：
+*  <b style="color: red;">从库</b>创建数据校验信息表，从库路由表dsns：
 
-    ```
+    ```shell
     use percona;
 
     CREATE TABLE `dsns` (  `id` int(11) NOT NULL AUTO_INCREMENT,  `parent_id` int(11) DEFAULT NULL,  `dsn` varchar(255) NOT NULL,  PRIMARY KEY (`id`));
@@ -115,7 +115,7 @@ select db, tbl, sum(this_cnt) as total_rows, count(*) as chunks from checksums w
 
     ```
 
-* 校验数据
+* 校验数据 在<b style="color: red;">从库</b>上执行
 
     ```
     pt-table-checksum --replicate=oa_gallery.checksums --nocheck-replication-filters --no-check-binlog-format --set-vars innodb_lock_wait_timeout=50 h=192.168.1.152,u=pt_user,p='pt_pass',P=3306 --databases=v71 --tables=t1 --recursion-method dsn=h=192.168.1.159,u=pt_user,p='pt_pass',P=3306,D=percona,t=dsns
@@ -130,7 +130,7 @@ select db, tbl, sum(this_cnt) as total_rows, count(*) as chunks from checksums w
     
     同步不一致的数据：
     pt-table-sync --charset=utf8 --replicate=percona.checksums h=192.168.1.152,u=pt_user,p=pt_pass h=192.168.1.159,u=pt_user,p=pt_pass  --execute
-
+    
     ```
 
 
@@ -140,8 +140,8 @@ select db, tbl, sum(this_cnt) as total_rows, count(*) as chunks from checksums w
 修复数据不一致的表
 pt-table-sync --replicate=gao.checksums --charset=utf8 h=192.168.1.152,u=pt_user,p=pt_pass  h=192.168.1.159,u=pt_user,p=pt_pass --execute --print
 
-```   
-    
+```
+
 ## tips
 
 pt-table-check pt-table-sync 从3.0.5版本开始支持 mysql channel 模式复制，示例如下：
