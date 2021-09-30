@@ -29,7 +29,10 @@ sudo numastat -p $(pidof mongod)
 
 **zone_reclaim_mode**
 
+```shell
 echo 0 > /proc/sys/vm/zone_reclaim_mode
+```
+
 
 
 **IO Scheduler**
@@ -85,13 +88,17 @@ mongo soft nproc 192276
 
 **Network Stack**
 
-```
+```shell
+vim /etc/sysctl.conf
+
 net.core.somaxconn = 4096
 net.ipv4.tcp_fin_timeout = 30
 net.ipv4.tcp_keepalive_intvl = 30
-net.ipv4.tcp_keepalive_time = 120
+net.ipv4.tcp_keepalive_time = 300
 net.ipv4.tcp_max_syn_backlog = 4096
 net.ipv4.tcp_keepalive_probes = 6
+
+sysctl -p
 ```
 
 
