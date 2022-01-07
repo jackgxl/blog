@@ -15,10 +15,9 @@
 
 ## 锁作用范围
 
-## reference
 
-<<<<<<< HEAD
-[https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html)
-=======
-[https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html]()
->>>>>>> master
+
+### reference
+
+[官方文档](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html)
+
