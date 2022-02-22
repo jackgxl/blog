@@ -1,20 +1,36 @@
 # RocksDB_Installation
 
+
+
+## Tips
+
+```shell
+先检查 cpu 是否支持
+yum 安装依赖
+解压make
+配置库 ldconfig
+```
+
+
+
 ## 依赖关系安装
 
 安装epel
 
-```
+```shell
 rpm -ivh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-
-yum install -y python3 snappy snappy-devel  zlib zlib-devel  bzip2 bzip2-devel  lz4-devel  libasan libzstd-devel
 ```
 
-```
-yum install -y zlib zlib-devel bzip2 bzip2-devel lz4-devel libasan snappy snappy-devel snappy zlib bzip2 lz4 ASAN zstd gcc-c++  gflags-devel readline-devel ncurses-devel openssl-devel lz4-devel gdb git cmake gcc-c++ bzip2-devel libaio-devel bison zlib-devel snappy-devel
-yum install zlib zlib-devel bzip2 bzip2-devel lz4-devel libasan snappy snappy-devel snappy zlib bzip2 lz4 gflags zstd gcc-c++ python3 -y 
-yum install libzstd-devel -y
+查看 cpu是否支持
 
+```shell
+cat /proc/cpuinfo| grep aes	
+```
+
+
+
+```shell
+yum install -y python3 snappy snappy-devel  zlib zlib-devel  bzip2 bzip2-devel libasan libzstd-devel  lz4-devel  bzip2 lz4 ASAN zstd gcc-c++  gflags-devel readline-devel ncurses-devel openssl-devel  gdb git cmake gcc-c++ bzip2-devel libaio-devel bison  gflags 
 ```
 
 epel8
