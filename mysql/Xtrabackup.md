@@ -9,8 +9,6 @@
 ```shell
 安装yum源
 yum install https://repo.percona.com/yum/percona-release-latest.noarch.rpm
-
-
 [root@localhost ~]# ls percona-*
 percona-toolkit-3.0.2-1.el7.x86_64.rpm  percona-xtrabackup-24-2.4.7-1.el7.x86_64.rpm
 
@@ -22,6 +20,9 @@ xtrabackup version 2.4.7 based on MySQL server 5.7.13 Linux (x86_64) (revision i
 
 [root@localhost ~]# innobackupex --version
 innobackupex version 2.4.7 Linux (x86_64) (revision id: 6f7a799)
+
+wget https://repo.percona.com/yum/release/7/RPMS/x86_64/qpress-11-1.el7.x86_64.rpm
+yum install qpress-11-1.el7.x86_64.rpm
 ```
 
 ## 备份恢复
@@ -29,7 +30,7 @@ innobackupex version 2.4.7 Linux (x86_64) (revision id: 6f7a799)
 
 ```shell
 [root@localhost ~]# mkdir -pv /data/backup/all
-mkdir: created directory ‘/data/backup/all’
+mkdir: created directory '/data/backup/all'
 
 ```
 
@@ -78,7 +79,7 @@ innobackupex --apply-log /data/backup/16/
 
 * 压缩备份
 
-```
+```shell
 innobackupex --stream=xbstream /root/backup/ > /root/backup/backup.xbstream
 
 innobackupex --stream=xbstream --compress /root/backup/ > /root/backup/backup.xbstream
@@ -102,33 +103,45 @@ innobackupex --stream=tar ./ | bzip2 - > backup.tar.bz2
 
 * 备份到远程
 
-```
+```shell
 innobackupex --defaults-file=/data/mysql3306/etc/my.cnf --user='root' --password='123456' --socket=/data/mysql3306/tmp/mysql.sock --safe-slave-backup  --slave-info --no-timestamp --use-memory=1G --compress --stream=xbstream /data/backup |ssh root@'172.16.64.154' "xbstream -x -C /data/backup/all"
 
 ```
 
 * 解压
 
-```
-innobackupex --decompress all/
+```shell
+xbstream -x -C c <c.xb 
+xtrabackup --decompress --target-dir=/home/gaoxueliang/c/
+xtrabackup --defaults-file=/etc/my.cnf_3307 --move-back --target-dir=/home/gaoxueliang/c/
 
 ```
 
 应用Redolog
 
+```shell
 innobackupex --apply-log /data/backup/all/
+```
+
+
 
 拷贝数据
 
+```shell
 innobackupex --defaults-file=/data/mysql3307/etc/my.cnf --move-back /data/backup/all/
+```
+
+
+
 
 
 tips:
 
-```
+```shell
 解压需要qpress 依赖
 tar zxf qpress-11-linux-x64.tar
 mv qpress /usr/local/bin/
+下载rpm  https://pkgs.org/download/qpress
 ```
 
 * 恢复
