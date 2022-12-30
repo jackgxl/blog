@@ -2,7 +2,7 @@
 
 ## 下载
 
-```
+```shell
 https://github.com/etcd-io/etcd/releases
 ```
 
@@ -25,7 +25,7 @@ Documentation  README-etcdctl.md  README.md  READMEv2-etcdctl.md
 
 ## 启动
 
-```
+```shell
 
 
 etcd --name 'etcd01' --data-dir=/data/etcd/data.etcd --wal-dir '/data/etcd/wal' \
@@ -60,7 +60,7 @@ etcd --name 'etcd02' --data-dir=/data/etcd/data.etcd --wal-dir '/data/etcd/wal' 
 
 ## 检查集群
 
-```
+```shell
 [root@localhost etcd]# etcdctl --endpoints="http://192.168.64.101:2379,http://192.168.64.183:2379,http://192.168.64.185:2379"  endpoint status  --write-out="table"
 +----------------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
 |          ENDPOINT          |        ID        | VERSION | DB SIZE | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS |

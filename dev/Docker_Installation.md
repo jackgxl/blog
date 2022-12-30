@@ -1,18 +1,28 @@
-# Docker_Installation
+
 
 # 环境
 
 ```
 [root@localhost docker_data]# cat /etc/redhat-release 
 CentOS Linux release 7.4.1708 (Core) 
+
+yum -y update：升级所有包同时也升级软件和系统内核
+yum -y upgrade：只升级所有包，不升级软件和系统内核
+
+卸载残余文件清理
+yum remove docker docker-common docker-selinux docker-engine
+
 ```
+
 
 # 配置yum源
 
 ```
 epel源请自行下载
 rpm -ivh epel-release-latest-7.noarch.rpm 
-sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo （中央仓库）
+
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo （阿里仓库）
 ```
 
 # 安装
@@ -20,7 +30,10 @@ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/dock
 yum安装docker-ce
 
 ```
+查看可用版本有哪些
 yum list docker-ce --showduplicates | sort -r
+
+安装
 sudo yum install docker-ce
 sudo systemctl start docker
 sudo systemctl enable docker
@@ -30,8 +43,7 @@ yum资源中没有docker-ce或者docker不是最新版
 
 ```
 yum install -y yum-utils device-mapper-persistent-data lvm2
-```
-```
+
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 ```
 

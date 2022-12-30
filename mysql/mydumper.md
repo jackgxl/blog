@@ -94,7 +94,7 @@ Application Options:
   --cipher                    A list of permissible ciphers to use for SSL encryption
 ```
 
-```
+```shell
 --database 指定需要备份的库
 
 --tables-list 指定需要备份的表，用，分隔（与regex option冲突时，以regex为准）

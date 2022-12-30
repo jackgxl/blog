@@ -25,8 +25,15 @@
         mongo hard nofile 640000
         mongo soft nproc 320000
         mongo hard nproc 320000
-    
-    ```
+     ```
+
+*  ssl
+
+```shell
+yum install libcurl openssl xz-libs -y
+
+
+```
 
 ## MongoDB 下载
 
@@ -41,6 +48,7 @@ mkdir -pv /data/mongo27019/{etc,var,log,tmp}
 openssl rand -base64 741 > /data/mongo27019/var/keyFile
 chmod 400 /data/mongo27019/var/keyFile
 ```
+
 
 ## mongod配置启动 
 
@@ -314,3 +322,5 @@ esac
 <a>https://blog.csdn.net/u014686399/article/details/84396240
 
 <a> http://www.lanceyan.com/tech/mongodb_repset2.html
+
+[[Configuration File Options — MongoDB Manual](https://www.mongodb.com/docs/manual/reference/configuration-options/#systemlog-options)]

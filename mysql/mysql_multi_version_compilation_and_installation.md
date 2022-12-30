@@ -13,24 +13,24 @@
 
 创建用户：
 
-```
+```shell
 useradd -M -s /sbin/nologin  mysql 
 ```
 
 配置依赖环境：
 
-```
-yum install  gcc gcc-c++ cmake  make  autoconf automake ncurses-devel zlib zlib-devel libxml2 libxml2-devel libaio.x86_64 libaio-devel.x86_64 readline.x86_64 readline-devel.x86_64 numactl numactl-devel.x86_64 numactl-libs.x86_64
+```shell
+yum install -y  gcc gcc-c++ cmake  make  autoconf automake ncurses-devel zlib zlib-devel libxml2 libxml2-devel libaio.x86_64 libaio-devel.x86_64 readline.x86_64 readline-devel.x86_64 numactl numactl-devel.x86_64 numactl-libs.x86_64
 ```
 
 分析工具
 
-```
+```shell
 yum install -y tcpdump strace psmisc.x86_64 gdb tcpflow hdparm sysstat
 ```
 配置系统环境：
 	
->```	
+>
 >   关闭NUMA
 > 
 >   For SWAP (centos7)
@@ -57,7 +57,7 @@ yum install -y tcpdump strace psmisc.x86_64 gdb tcpflow hdparm sysstat
 >   XFS
 >   noatime, nodiratime, nobarrier
 > 
->```
+>
 
 ## mysql5.1
 

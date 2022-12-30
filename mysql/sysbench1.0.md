@@ -76,7 +76,20 @@ sysbench /root/sysbench-1.0.4/src/lua/oltp_read_write.lua --db-driver=mysql --my
 
 sysbench /root/sysbench-1.0.4/src/lua/oltp_write_only.lua  --db-driver=mysql --mysql-host=localhost --mysql-port=3306  --mysql-user=root --mysql-password=213456 --mysql-socket=/ssd/mysql3306/tmp/mysql.sock --mysql-db=db1  --tables=10 --table-size=500000 --threads=50 --report-interval=5 --time=300 run
 
-SQL statistics:    queries performed:        read:                            4128628        write:                           1179608        other:                           589804        total:                           5898040    transactions:                        294902 (982.88 per sec.)    queries:                             5898040 (19657.55 per sec.)    ignored errors:                      0      (0.00 per sec.)    reconnects:                          0      (0.00 per sec.)General statistics:    total time:                          300.0347s    total number of events:              294902
+SQL statistics:
+    queries performed:
+        read:                            4128628
+        write:                           1179608
+        other:                           589804
+        total:                           5898040
+    transactions:                        294902 (982.88 per sec.)
+    queries:                             5898040 (19657.55 per sec.)
+    ignored errors:                      0      (0.00 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+General statistics:
+    total time:                          300.0347s
+    total number of events:              294902
 ```
 
 ```

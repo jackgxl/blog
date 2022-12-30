@@ -20,7 +20,7 @@ yum install gcc gcc-c++ tcl.x86_64 tcl-devel.x86_64 -y
 
 ```
 echo never > /sys/kernel/mm/transparent_hugepage/enabled
-echo 1024 >/proc/sys/net/core/somaxconn
+echo 4096 >/proc/sys/net/core/somaxconn
 
 ```
 
