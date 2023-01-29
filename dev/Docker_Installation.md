@@ -19,7 +19,7 @@ yum remove docker docker-common docker-selinux docker-engine
 
 ```
 epel源请自行下载
-rpm -ivh epel-release-latest-7.noarch.rpm 
+rpm -ivh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo （中央仓库）
 
 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo （阿里仓库）
@@ -181,6 +181,30 @@ Server: Docker Engine - Community
   OS/Arch:          linux/amd64
   Experimental:     false
 ```
+
+自动安装脚本
+
+```shell
+#!/bin/bash
+set -e
+set -x
+
+yum remove docker docker-common docker-selinux docker-engine -y
+
+rpm -ivh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+yum clean all && yum makecache
+
+yum -y install yum-utils
+
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+sudo yum install docker-ce -y
+
+sudo systemctl start docker && sudo systemctl enable docker
+```
+
+
 
 # 参考资料
 
