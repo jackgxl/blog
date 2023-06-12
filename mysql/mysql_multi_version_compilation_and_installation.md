@@ -26,7 +26,7 @@ yum install -y  gcc gcc-c++ cmake  make  autoconf automake ncurses-devel zlib zl
 分析工具
 
 ```shell
-yum install -y tcpdump strace psmisc.x86_64 gdb tcpflow hdparm sysstat net-tools
+yum install -y tcpdump strace psmisc.x86_64 gdb tcpflow hdparm sysstat net-tools vim sysstat  tmux net-tool  bind-utils  traceroute iftop htop nload 
 ```
 配置系统环境：
 	
